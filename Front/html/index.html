@@ -8,27 +8,32 @@
 	<title>Orinoursons - Orinoco</title>
 	<meta name="description"
 		content="Venez chercher le réconfort dans les bras de nos Orinoursons, des peluches de fabrication locale et artisanale - Orinoursons : Leur douceur est un gage de qualité.">
-	<link rel="icon" type="image/png" href="./images/favicon.png">
+	<link rel="icon" type="image/png" href="../images/favicon.png">
 
 	<!-- styles + fontawesome -->
-	<link rel="stylesheet" href="./style/style.css">
+	<link rel="stylesheet" href="../style/style.css">
 	<script src="https://kit.fontawesome.com/1cd9585249.js" crossorigin="anonymous"></script>
+
+	<!-- pages -->
+	<script src="../js/pages/home.js"></script>
+  
+	<!-- composants -->
+	<script src="../js/cart.js"></script>
+  
+	<!-- éléments structurants -->
+	<script src="../js/dataFetcher.js"></script>
+	<script src="../js/index.js" defer></script>
 
 </head>
 
 <body>
-	<!-- appel scripts js -->
-	<script src="./dist/polyfill.bundle.js"></script>
-	<script src="./dist/app.bundle.js"></script>
-
-
 	<header>
 		<nav>
 			<a href="./index.html" class="homeLink" aria-label="Accueil">
 				<i class="fas fa-home homeLink__icon"></i>
 				<p>Accueil</p>
 			</a>
-			<img src="./images/logo.png" alt="Logo Orinoco" class="logo">
+			<img src="../images/logo.png" alt="Logo Orinoco" class="logo">
 		</nav>
 	</header>
 
@@ -42,9 +47,7 @@
 		<section>
 			<h2>Nos oursons de Compétition</h2>
 			<div class="cardContainer">
-
-				<!-- le script home.js implémente les cartes ici -->
-
+				
 			</div>
 		</section>
 	</main>

@@ -1,4 +1,4 @@
-export class DataFetcher {
+class DataFetcher {
   items = null;
   constructor(url) {
     this.url = url;

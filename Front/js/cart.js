@@ -1,7 +1,7 @@
-export class Cart {
+class Cart {
   /* constructs cart HTML element */
   constructor(domTarget) {
-    this.content = data.dataFetcher.getCart();
+    this.content = data.DataFetcher.getCart();
     this.DOM = document.createElement("cart");
     domTarget.appendChild(this.DOM);
     this.render();
@@ -12,8 +12,8 @@ export class Cart {
    */
   render() {
     this.DOM.innerHTML = `<a href="./order.html" class="iconCart">
-		  <span>Mon panier</span>
-		  <i class="fas fa-shopping-cart">${this.content.length}</i>
+		  <i class="fas fa-shopping-cart"> ${this.content.length}</i>
+		  <p>Mon Panier</p>
 		</a>`;
   }
 
@@ -27,7 +27,7 @@ export class Cart {
       this.content.push(itemId);
     }
     this.render();
-    data.dataFetcher.saveCart(this.content);
+    data.DataFetcher.saveCart(this.content);
   }
 
   /**
@@ -37,7 +37,7 @@ export class Cart {
   sub(itemId) {
     this.content.splice(this.content.indexOf(itemId), 1);
     this.render();
-    data.dataFetcher.saveCart(this.content);
+    data.DataFetcher.saveCart(this.content);
   }
 
   /**
@@ -51,7 +51,7 @@ export class Cart {
     }
     this.content = newContent;
     this.render();
-    data.dataFetcher.saveCart(this.content);
+    data.DataFetcher.saveCart(this.content);
   }
 
   /**
@@ -60,6 +60,6 @@ export class Cart {
   deleteAll() {
     this.content = [];
     this.render();
-    data.dataFetcher.saveCart(this.content);
+    data.DataFetcher.saveCart(this.content);
   }
 }

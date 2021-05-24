@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Valxer/KevinLeVanPhung_5_24052021#readme",
   "browserslist": "last 4 versions",
+  "type": "module",
   "devDependencies": {
     "@babel/core": "^7.14.3",
     "@babel/preset-env": "^7.14.2",

@@ -1,0 +1,27 @@
+{
+  "name": "p5_24052021",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Valxer/KevinLeVanPhung_5_24052021.git"
+  },
+  "author": "LeVanPhung_Kevin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Valxer/KevinLeVanPhung_5_24052021/issues"
+  },
+  "homepage": "https://github.com/Valxer/KevinLeVanPhung_5_24052021#readme",
+  "devDependencies": {
+    "@babel/core": "^7.14.3",
+    "@babel/preset-env": "^7.14.2",
+    "babel-loader": "^8.2.2",
+    "babel-polyfill": "^6.26.0",
+    "webpack": "^5.37.1",
+    "webpack-cli": "^4.7.0"
+  }
+}

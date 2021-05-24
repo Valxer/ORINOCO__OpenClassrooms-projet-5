@@ -13,7 +13,7 @@ function pageSelect() {
       options.get("id")
     );
   else if (url == "/order.html")
-    return new Order(document.getElementsByClassName("cartContent"));
+    return new Order(document.getElementsByClassName("orderContent"));
   else if (url == "/validation.html")
     return new Validation(document.getElementsByClassName("validationContent"));
   else return new Home(document.getElementsByClassName("cardContainer"));

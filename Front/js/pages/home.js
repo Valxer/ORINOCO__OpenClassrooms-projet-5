@@ -17,9 +17,7 @@ class Home {
     } catch (err) {
       console.error(err);
     }
-	console.log(content);
-	console.log(domTarget);
-    domTarget.innerHTML = content;
+    domTarget[0].innerHTML = content;
   }
 
   /**
@@ -55,9 +53,7 @@ class Home {
   showColor(colors) {
     let html = "";
     for (let i = 0, size = colors.length; i < size; i++) {
-      html += `<i class="fas fa-circle ${this.colorToClass(
-        colors[i]
-      )}" ></i>`;
+      html += `<i class="fas fa-circle ${this.colorToClass(colors[i])}" ></i>`;
     }
     return html;
   }

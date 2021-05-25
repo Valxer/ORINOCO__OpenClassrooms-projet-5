@@ -3,7 +3,7 @@
  *
  * @returns {Page} returns an object that differs depending on the page
  */
-function pageSelect() {
+function scriptSelect() {
   let options = new URL(document.location).searchParams;
   var url = window.location.pathname;
 
@@ -23,4 +23,4 @@ const data = {
   DataFetcher: new DataFetcher("http://localhost:3000/api/teddies/"),
 };
 data.cart = new Cart(document.querySelector("nav"));
-data.page = pageSelect();
+data.page = scriptSelect();

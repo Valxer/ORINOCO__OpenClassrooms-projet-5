@@ -1,18 +1,18 @@
 class Home {
   constructor(domTarget) {
-    this.showAllProducts(domTarget);
+    this.displayAllProducts(domTarget);
   }
 
   /**
-   * takes all items from API and create cards inside the HTML target
-   * @param {HTMLElement}	domTarget	target of HTML implementation
+   * Takes all items from API and create cards inside the HTML target
+   * @param {HTMLCollection}	domTarget	target of HTML implementation
    */
-  async showAllProducts(domTarget) {
+  async displayAllProducts(domTarget) {
     let content = "";
     try {
       const items = await data.DataFetcher.fetchItems();
       for (let i = 0, size = items.length; i < size; i++) {
-        content += this.productHtml(items[i]);
+        content += this.getHtml(items[i]);
       }
     } catch (err) {
       console.error(err);
@@ -21,20 +21,20 @@ class Home {
   }
 
   /**
-   *generates HTML for the object given
-   * @param	{Object}	item	les propriétés de l'objet
+   *Generates HTML for the object given
+   * @param	{Object}	item	item properties
    *
-   * @return {HTMLElement}		le html du produit
+   * @return {String}		Html text to implement
    */
-  productHtml(item) {
+  getHtml(item) {
     return /*html*/ `
 		<article class="teddyCard">
-			<a href="./produit.html?_id=${item._id}">
+			<a href="./item.html?_id=${item._id}">
 			  <figure>
 				<img src="${item.imageUrl}" alt="${item.name}">
 				<figcaption>
 				  <h3 id="h3">${item.name}</h3>
-				  <span class="displayColor">${this.showColor(item.colors)}</span>
+				  <span class="displayColor">${this.displayColor(item.colors)}</span>
 				  <span class="price">${item.price / 100},00€</span>
 				  <p>${item.description}</p>
 				</figcaption>
@@ -45,12 +45,12 @@ class Home {
   }
 
   /**
-   * generate HTML for the choice of colors according to the color array given
+   * Generate HTML for the choice of colors according to the color array given
    * @param   {Array}	colors	array of colors
    *
    * @return  {String}			HTML string
    */
-  showColor(colors) {
+  displayColor(colors) {
     let html = "";
     for (let i = 0, size = colors.length; i < size; i++) {
       html += `<i class="fas fa-circle ${this.colorToClass(colors[i])}" ></i>`;
@@ -59,15 +59,14 @@ class Home {
   }
 
   /**
-   * Récupère le nom de la couleur dans l'api et le transforme en nom de classe.
-   * @param   {string}  color  correspond aux couleurs pour chaque nounours
+   * Transforms the color name into a class name for HTML implementation
+   * @param   {string}  color  color name
    *
-   * @return  {string}         nom de classe en camelCase qui finit par Color utilisé dans le CSS.
+   * @return  {string}         class name composed by the colorname + Color 
    */
   colorToClass(color) {
     let colors = color.toLowerCase().split(" ");
     let maj;
-
     for (let i = 1, size = colors.length; i < size; i++) {
       maj = colors[i].slice(0, 1).toUpperCase();
       colors[i] = maj + colors[i].slice(1);

@@ -19,7 +19,7 @@ class Cart {
 
   /**
    * adds the product in parameter at the end of the array, then refreshes the HTML input and saves the cart in localStorage
-   * @param {ObjectId} 	itemId	id of the product we want to add
+   * @param {String} 	itemId	id of the product we want to add
    * @param {Int} 		qty		number of given product we want to add by default 1
    */
   add(itemId, qty = 1) {
@@ -32,7 +32,7 @@ class Cart {
 
   /**
    * suppresses one iteration of the product which id was given in parameter, then refreshes the HTML input and saves the cart in localStorage
-   * @param {ObjectId}	itemId	id of the product we want to substract
+   * @param {String}	itemId	id of the product we want to substract
    */
   sub(itemId) {
     this.content.splice(this.content.indexOf(itemId), 1);
@@ -42,7 +42,7 @@ class Cart {
 
   /**
    * suppresses all iteration of a product which id is given in parameter, then refreshes the HTML input and saves the cart in localStorage
-   * @param {ObjectId}	itemId id of the product we want to suppress
+   * @param {String}	itemId id of the product we want to suppress
    */
   delete(itemId) {
     const newContent = [];

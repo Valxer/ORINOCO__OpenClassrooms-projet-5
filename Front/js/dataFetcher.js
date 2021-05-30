@@ -23,7 +23,7 @@ class DataFetcher {
    *
    * @returns {Object} 		returns the object having the given id
    */
-  async getProduct(itemId) {
+  async getItem(itemId) {
     if (this.items === null) await this.fetchItems();
     return this.getFromArray(itemId);
   }

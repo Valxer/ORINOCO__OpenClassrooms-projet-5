@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Votre panier | Orinoco</title>
+	<meta name="description"
+		content="N'attendez plus pour valider votre panier et recevoir votre livraison de tendressse.">
+	<link rel="icon" type="image/png" href="../images/favicon.png">
+
+	<!-- styles + fontawesome -->
+	<link rel="stylesheet" href="../style/style.css">
+	<script src="https://kit.fontawesome.com/1cd9585249.js" crossorigin="anonymous"></script>
+
+	<!-- Page -->
+	<script src="../js/pages/order.js"></script>
+
+	<!-- Cart -->
+	<script src="../js/cart.js"></script>
+
+	<!-- Fetcher -->
+	<script src="../js/dataFetcher.js"></script>
+	<script src="../js/index.js" defer></script>
+
+</head>
+
+<body>
+	<header>
+		<nav>
+			<a href="./index.html" class="homeLink" aria-label="Accueil">
+				<i class="fas fa-home homeLink__icon"></i>
+				<p>Accueil</p>
+			</a>
+			<img src="../images/logo.png" alt="Logo Orinoco" class="logo">
+		</nav>
+	</header>
+	<main>
+		<h1>Votre panier</h1>
+		<p>Revoyez bien les éléments de votre commande et vérifiez bien les quantités demandées<br />Lorsque tout vous
+			semble en règle remplissez le formulaire sous votre panier pour finaliser la transaction.
+		</p>
+		<table>
+			<thead class="orderHeader">
+
+			</thead>
+			<tbody class="orderContent">
+
+			</tbody>
+			<tfoot class=" orderPrice">
+
+			</tfoot>
+		</table>
+		<h2 class="formTitle">Formulaire de finalisation</h2>
+		<form method="POST" class="orderForm" id="orderForm">
+			
+		</form>
+	</main>
+	<footer>
+		<ul class="social">
+			<li class="social__elt">
+				<a href="https://www.facebook.com" aria-label="Facebook">
+					<i class="fab fa-facebook-f"></i>
+				</a>
+			</li>
+			<li class="social__elt">
+				<a href="https://www.twitter.com" aria-label="Twitter">
+					<i class="fab fa-twitter"></i>
+				</a>
+			</li>
+			<li class="social__elt">
+				<a href="https://www.instagram.com" aria-label="Instagram">
+					<i class="fab fa-instagram"></i>
+				</a>
+			</li>
+		</ul>
+		<ul class="links">
+			<li class="links__elt">
+				<a href="#" target="_blank" rel="noopener">Mentions Légales</a>
+			</li>
+			<li class="links__elt">
+				<a href="#" target="_blank" rel="noopener">Mieux nous connaître</a>
+			</li>
+			<li class="links__elt">
+				<a href="#" target="_blank" rel="noopener">Moyens de paiement</a>
+			</li>
+			<li class="links__elt">
+				<a href="#" target="_blank" rel="noopener">Besoin d'aide ?</a>
+			</li>
+		</ul>
+	</footer>
+</body>
+
+</html>

@@ -20,10 +20,10 @@ class Cart {
   /**
    * adds the product in parameter at the end of the array, then refreshes the HTML input and saves the cart in localStorage
    * @param {String} 	itemId	id of the product we want to add
-   * @param {Int} 		qty		number of given product we want to add by default 1
+   * @param {Int} 		nbr		number of given product we want to add by default 1
    */
-  add(itemId, qty = 1) {
-    for (let i = 0; i < qty; i++) {
+  add(itemId, nbr = 1) {
+    for (let i = 0; i < nbr; i++) {
       this.content.push(itemId);
     }
     this.render();
@@ -46,7 +46,7 @@ class Cart {
    */
   delete(itemId) {
     const newContent = [];
-    for (let i = 0, size = this.content.length; i < size; i++) {
+    for (let i = 0; i < this.content.length; i++) {
       if (this.content[i] !== itemId) newContent.push(this.content[i]);
     }
     this.content = newContent;

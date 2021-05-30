@@ -6,6 +6,7 @@
 function scriptSelect() {
   const id = extractId(document.location.search);
   const url = window.location.pathname;
+  console.log(url);
 
   if (url == "/Front/html/item.html")
     return new Item(
@@ -29,7 +30,7 @@ function scriptSelect() {
 function extractId(strToParse) {
   let result;
   let isItId = false;
-  for (let i = 0, size = strToParse.length; i < size; i++) {
+  for (let i = 0; i < strToParse.length; i++) {
     if (isItId){
       result = strToParse.slice(i);
       i = strToParse.length;

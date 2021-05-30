@@ -66,7 +66,7 @@ class Item {
    */
   displayColors(colors) {
     let html = "";
-    for (let i = 0, size = colors.length; i < size; i++) {
+    for (let i = 0; i < colors.length; i++) {
       html += `<i class="fas fa-circle ${this.colorToClass(colors[i])}" ></i>`;
     }
     return html;
@@ -82,7 +82,7 @@ class Item {
     let colors = color.toLowerCase().split(" ");
     let maj;
 
-    for (let i = 1, size = colors.length; i < size; i++) {
+    for (let i = 1; i < colors.length; i++) {
       maj = colors[i].slice(0, 1).toUpperCase();
       colors[i] = maj + colors[i].slice(1);
     }
@@ -97,7 +97,7 @@ class Item {
    */
   displayChoice(colors) {
     let html = "";
-    for (let i = 0, size = colors.length; i < size; i++) {
+    for (let i = 0; i < colors.length; i++) {
       html += ` <option>${this.getColorName(colors[i])}</option>`;
     }
     return html;
@@ -112,7 +112,7 @@ class Item {
   getColorName(color) {
     let name = color.toLowerCase().split(" ");
     let letter;
-    for (let i = 0, size = name.length; i < size; i++) {
+    for (let i = 0; i < name.length; i++) {
       letter = name[i].slice(0, 1).toUpperCase();
       name[i] = letter + name[i].slice(1);
     }
@@ -128,7 +128,6 @@ class Item {
     let add = document.getElementById("addBtn");
     let order = document.getElementById("orderBtn");
 
-    console.log(sub);
     sub.addEventListener("click", this.subOne);
     add.addEventListener("click", this.addOne);
     order.addEventListener("click", this.orderItems);

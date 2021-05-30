@@ -11,7 +11,7 @@ class Home {
     let content = "";
     try {
       const items = await data.DataFetcher.fetchItems();
-      for (let i = 0, size = items.length; i < size; i++) {
+      for (let i = 0; i < items.length; i++) {
         content += this.getHtml(items[i]);
       }
     } catch (err) {
@@ -52,7 +52,7 @@ class Home {
    */
   displayColor(colors) {
     let html = "";
-    for (let i = 0, size = colors.length; i < size; i++) {
+    for (let i = 0; i < colors.length; i++) {
       html += `<i class="fas fa-circle ${this.colorToClass(colors[i])}" ></i>`;
     }
     return html;
@@ -67,7 +67,7 @@ class Home {
   colorToClass(color) {
     let colors = color.toLowerCase().split(" ");
     let maj;
-    for (let i = 1, size = colors.length; i < size; i++) {
+    for (let i = 1; i < colors.length; i++) {
       maj = colors[i].slice(0, 1).toUpperCase();
       colors[i] = maj + colors[i].slice(1);
     }

@@ -1,7 +1,7 @@
 class Order {
   content = {};
   constructor(domTarget) {
-    this.domTarget = domTarget;
+    this.domTarget = domTarget[0];
     this.setItemList(data.Cart.content);
     this.displayOrder();
   }
@@ -23,52 +23,59 @@ class Order {
   /**
    * Displays the table summarizing the products the user wants to order
    */
-  displayOrder() {
+  async displayOrder() {
     let html = "";
     let i = 0;
-    let properties;
+    let item;
+    let item2;
     let total = 0;
+    let anything = true;
 
     try {
       for (const [key, value] of Object.entries(this.content)) {
         i++;
-        properties = await data.DataFetcher.getItem(key);
+        item = await data.DataFetcher.getItem(key);
+        console.log({ ...value, ...item, number: i });
         html += this.itemHTML({
           ...value,
-          ...properties,
+          ...item,
           number: i,
         });
-        total += (properties.price * value.howMany) / 100;
+        total += (item.price * value.howMany) / 100;
       }
-      if (html === "") html = this.noItemHTML();
+      if (html === "") {
+        html = this.noItemHTML();
+        anything = false;
+      }
     } catch (e) {
       console.error(e);
-      html.errorHTML();
+      html = errorHTML();
+      anything = false;
     }
-    this.domTarget[0].innerHTML = html;
-    this.displayTotal(total);
+    this.domTarget.innerHTML = html;
+    if (anything) this.displayTotal(total);
   }
 
   /**
    *Returns the HTML string to implement if the user has item(s)in his cart
-   * @param {Object} properties 			Item properties
-   * @param {String} properties._id			Id of the item in the API
-   * @param {String} properties.imageUrl	Image
-   * @param {String} properties.name		Item name
-   * @param {Number} properties.howMany		Desired quantity of item
-   * @param {Number} properties.number		Number attributed to the item
-   * @param {Number} properties.price		Price of a single item
+   * @param {Object} item 			Item properties
+   * @param {String} item._id			Id of the item in the API
+   * @param {String} item.imageUrl	Image
+   * @param {String} item.name		Item name
+   * @param {Number} item.howMany		Desired quantity of item
+   * @param {Number} item.number		Number attributed to the item
+   * @param {Number} item.price		Price of a single item
    *
    * @returns {String}						HTML text to implement
    */
-  itemHTML(properties) {
+  itemHTML(item) {
     return `
 	<tr>
       <td>
-        <img src="${properties.imageUrl}" alt="ours ${properties.number}">
+        <img src="${item.imageUrl}" alt="ours ${item.number}">
       </td>
       <td>
-        <h3>${properties.name}</h3>
+        <h3>${item.name}</h3>
       </td>
       <td>
         <div class="howMany">
@@ -76,7 +83,7 @@ class Order {
             <i class="fas fa-minus"></i>
           </div>
           <input type="text" class="field" value="${
-            properties.howMany
+            item.howMany
           }" aria-label="Nombre d'ours voulus">
           <div class="addBtn">
             <i class="fas fa-plus"></i>
@@ -84,7 +91,7 @@ class Order {
         </div>
       </td>
       <td>
-        <p>total = ${(properties.howMany * properties.price) / 100},00€</p>
+        <p>total = ${(item.howMany * item.price) / 100},00€</p>
       </td>
       <td>
         <i class="fas fa-trash-alt trashIcon"></i>
@@ -111,6 +118,10 @@ class Order {
     `;
   }
 
+  /**
+   * Displays the total price if the user has something in his cart
+   * @param {Number} total  Total price of the cart the user desires
+   */
   displayTotal(total) {
     document.querySelector("tfoot.orderPrice").innerHTML = `
       <tr>
@@ -119,7 +130,74 @@ class Order {
         </td>
       </tr>
     `;
-    //this.displayForm();
-    //this.listen(total);
+    this.displayForm();
+    this.listen(total);
+  }
+
+  /**
+   * displays the form if the user has ordered something
+   */
+  displayForm() {
+    document.getElementById("orderForm").innerHTML = /*html*/ `
+      <label for="firstName">Prénom<span>*</span></label>
+      <input type="text" name="firstName" id="firstName" placeholder="Prénom" pattern="^[a-zA-Z]{1}[a-zA-Z'À-ÿ -]+$" required oninput="orinoco.page.checkField(this,'Ne doit contenir que des lettres (au moins 2)')">
+      <label for="lastName">Nom de famille<span>*</span></label>
+      <input type="text" name="lastName" id="lastName" placeholder="Nom"   pattern="^[a-zA-Z]{1}[a-zA-Z'À-ÿ -]+$" required oninput="orinoco.page.checkField(this,'Ne doit contenir que des lettres (au moins 2)')">
+      <label for="address">Adresse<span>*</span></label>
+      <input type="text" name="address" id="address" placeholder="Adresse" pattern="[a-zA-Z0-9À-ÿ '-]{2,}" required oninput="orinoco.page.checkField(this,'Ne doit contenir que des lettres et des chiffres (au moins 2)')">
+      <label for="city">Ville<span>*</span></label>
+      <input type="text" name="city" id="city" placeholder="Ville"   pattern="^[a-zA-Z]{1}[a-zA-Z'À-ÿ -]+$" required oninput="orinoco.page.checkField(this,'Ne doit contenir que des lettres (au moins 2)')">
+      <label for="email">Adresse de messagerie<span>*</span></label>
+      <input type="email" name="email" id="email"  placeholder="E-mail" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([_\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})" required oninput="orinoco.page.checkField(this,'Doit respecter le format email')">
+      <button class="formBtn" type="submit">Finaliser la commande</button>
+      <p class="notice">Les champs marqués d'un <span>*</span> sont obligatoires afin de pouvoir valider votre commande</p>
+    `;
+    this.previousUser();
+  }
+
+  /**
+   * Checks if a user is already registered and if it's the case adds the user informations in the form
+   */
+  previousUser() {
+    let user = JSON.parse(localStorage.getItem("user"));
+    if(user != null){
+      document.getElementById("firstName").value = user.firstName;
+      document.getElementById("lastName").value = user.lastName;
+      document.getElementById("address").value = user.address;
+      document.getElementById("city").value = user.city;
+      document.getElementById("email").value = user.email;
+    }
+  }
+
+  /**
+   * Generates all the eventListeners on the page and if the form is sent registers the total price in localStorage
+   * @param {Number} price the total price of the cart
+   */
+  listen(price) {
+    let sub = document.getElementsByClassName("subBtn");
+    let add = document.getElementsByClassName("addBtn");
+    let trash = document.getElementsByClassName("trashIcon");
+
+    for (let i = 0; i < sub.length; i++) {
+      console.log(sub[i]);
+      sub[i].addEventListener("click", this.subOne);      //onclick="data.Page.subOne('${item._id}')"
+      add[i].addEventListener("click", this.addOne);      //onclick="data.Page.addOne('${item._id}')"
+      trash[i].addEventListener("click", this.trashItem); //onclick="data.Page.trashItem('${item._id}')"
+    }
+
+    price = price;
+    //listenForm(price);
+  }
+
+  subOne() {
+    alert("yes");
+  }
+
+  addOne() {
+    alert("no");
+  }
+
+  trashItem() {
+    alert("maybe");
   }
 }

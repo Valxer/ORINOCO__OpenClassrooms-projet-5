@@ -149,7 +149,7 @@ class Order {
       <input type="text" name="city" id="city" placeholder="Ville"   pattern="^[a-zA-Z]{1}[a-zA-Z'À-ÿ -]+$" required oninput="orinoco.page.checkField(this,'Ne doit contenir que des lettres (au moins 2)')">
       <label for="email">Adresse de messagerie<span>*</span></label>
       <input type="email" name="email" id="email"  placeholder="E-mail" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([_\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})" required oninput="orinoco.page.checkField(this,'Doit respecter le format email')">
-      <button class="formBtn" type="submit">Finaliser la commande</button>
+      <button id="submit type="submit">Finaliser la commande</button>
       <p class="notice">Les champs marqués d'un <span>*</span> sont obligatoires afin de pouvoir valider votre commande</p>
     `;
     this.previousUser();
@@ -186,11 +186,13 @@ class Order {
     }
 
     price = price;
-    //listenForm(price);
+    //this.checkFormFields();
+    this.listenForm(price);
   }
 
   subOne() {
     alert("yes");
+
   }
 
   addOne() {
@@ -199,5 +201,16 @@ class Order {
 
   trashItem() {
     alert("maybe");
+  }
+
+  checkFormFields() {}; //need param onclick?
+
+  listenForm(price) {
+    const btn = document.getElementById("submit");
+
+    btn.addEventListener("submit",e => {
+      e.preventDefault();
+      this.validOrder();
+    })
   }
 }

@@ -140,20 +140,25 @@ class Order {
     if (total) {
       document.getElementById("orderForm").innerHTML = /*html*/ `
       <label for="firstName">Prénom<span>*</span></label>
-      <input type="text" name="firstName" id="firstName" placeholder="Prénom" pattern="^[a-zA-Z]{1}[a-zA-Z'À-ÿ -]+$" required oninput="orinoco.page.checkField(this,'Ne doit contenir que des lettres (au moins 2)')">
+      <input type="text" name="firstName" id="firstName" placeholder="Prénom" pattern="^[A-Za-z][A-Za-zÀ-ÿ]*([ '-]?[A-Za-zÀ-ÿ]+)*$" required oninput="data.Page.checkFormField(this,'Doit contenir au moins 2 lettres qui peuvent être séparées par un espace, un tiret ou une apostrophe')">
+      <div id="firstNameWarning"></div>
       <label for="lastName">Nom de famille<span>*</span></label>
-      <input type="text" name="lastName" id="lastName" placeholder="Nom"   pattern="^[a-zA-Z]{1}[a-zA-Z'À-ÿ -]+$" required oninput="orinoco.page.checkField(this,'Ne doit contenir que des lettres (au moins 2)')">
+      <input type="text" name="lastName" id="lastName" placeholder="Nom" pattern="^[A-Za-z][A-Za-zÀ-ÿ]*([ '-]?[A-Za-zÀ-ÿ]+)*$" required oninput="data.Page.checkFormField(this,'Doit contenir au moins 2 lettres qui peuvent être séparées par un espace, un tiret ou une apostrophe')">
+      <div id="lastNameWarning"></div>
       <label for="address">Adresse<span>*</span></label>
-      <input type="text" name="address" id="address" placeholder="Adresse" pattern="[a-zA-Z0-9À-ÿ '-]{2,}" required oninput="orinoco.page.checkField(this,'Ne doit contenir que des lettres et des chiffres (au moins 2)')">
+      <input type="text" name="address" id="address" placeholder="Adresse" pattern="[a-zA-Z0-9À-ÿ '-]{2,}" required oninput="data.Page.checkFormField(this,'Doit contenir au moins 2 lettres ou chiffres qui peuvent être séparées par un espace, un tiret ou une apostrophe')">
+      <div id="addressWarning"></div>
       <label for="city">Ville<span>*</span></label>
-      <input type="text" name="city" id="city" placeholder="Ville"   pattern="^[a-zA-Z]{1}[a-zA-Z'À-ÿ -]+$" required oninput="orinoco.page.checkField(this,'Ne doit contenir que des lettres (au moins 2)')">
+      <input type="text" name="city" id="city" placeholder="Ville" pattern="^[A-Za-z][A-Za-zÀ-ÿ]*([ '-]?[A-Za-zÀ-ÿ]+)*$" required oninput="data.Page.checkFormField(this,'Doit contenir au moins 2 lettres qui peuvent être séparées par un espace, un tiret ou une apostrophe')">
+      <div id="cityWarning"></div>
       <label for="email">Adresse de messagerie<span>*</span></label>
-      <input type="email" name="email" id="email"  placeholder="E-mail" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([_\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})" required oninput="orinoco.page.checkField(this,'Doit respecter le format email')">
+      <input type="email" name="email" id="email"  placeholder="E-mail" pattern="^[a-zA-Z0-9À-ÿ!#$%&'*+/=?^_\`{|}~-]+(?:\.[a-zA-Z0-9À-ÿ!#$%&'*+/=?^_\`{|}~-]+)*@(?:[a-zA-ZÀ-ÿ0-9](?:[a-zA-ZÀ-ÿ0-9-]*[a-zA-ZÀ-ÿ0-9])?\.)+[a-zA-ZÀ-ÿ0-9]{1,4}$" required oninput="data.Page.checkFormField(this,'Doit respecter le format email')">
+      <div id="emailWarning"></div>
       <button id="submit" type="submit">Finaliser la commande</button>
       <p class="notice">Les champs marqués d'un <span>*</span> sont obligatoires afin de pouvoir valider votre commande</p>
     `;
       this.previousUser();
-      this.listen(total);
+     // this.listen(total);
     } else document.getElementById("orderForm").innerHTML = ``;
   }
 
@@ -172,17 +177,10 @@ class Order {
   }
 
   /**
-   * Generates all the eventListeners on the page and if the form is sent registers the total price in localStorage
+   *
    * @param {Number} price the total price of the cart
    */
   listen(price) {
-    //this.checkFormFields();
-    this.listenForm(price);
-  }
-
-  checkFormFields() {} //need param onclick?
-
-  listenForm(price) {
     const btn = document.getElementById("submit");
     price = price;
 
@@ -190,6 +188,14 @@ class Order {
       e.preventDefault();
       this.validOrder();
     });
+  }
+
+  checkFormField(domTarget, msg) {
+    console.log(domTarget.validity.valid);
+    console.log(msg);
+    if (domTarget.validity.valid)
+      document.getElementById(domTarget.id + "Warning").innerHTML = "";
+    else document.getElementById(domTarget.id + "Warning").innerHTML = msg;
   }
 
   /**

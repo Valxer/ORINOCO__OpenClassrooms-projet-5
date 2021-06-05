@@ -6,7 +6,6 @@
 function scriptSelect() {
   const id = extractId(document.location.search);
   const url = window.location.pathname;
-  console.log(url);
 
   if (url == "/Front/html/item.html")
     return new Item(

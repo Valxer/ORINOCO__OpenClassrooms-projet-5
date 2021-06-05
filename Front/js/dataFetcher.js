@@ -65,29 +65,25 @@ class DataFetcher {
   }
 
   /**
-   * Launches a fetch request with POST method with all needed informations for the order
+   * Launches a fetch request with POST method with all needed informations for the order, creates a user in localStorage and redirects to the validation page
    *
-   * @param   {String}  contactItems  string containing personnal informations and all the products in the order
-   *
-   * @return  {Object}                contains "contact", "product" and "orderId"
-   * @return  {[Type]}                then, saves contact infos in localStorage and redirect to confirmation page by setting orderId in url parameters
+   * @param   {String}  data  string containing personnal informations and all the products in the order
    */
-  postOrder(contactItems) {
+  postOrder(data) {
     fetch("http://localhost:3000/api/teddies/order", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      mode: "cors",
-      body: contactItems,
+      body: data
     })
       .then((res) => {
         return res.json();
       })
       .then((r) => {
-        localStorage.setItem("contact", JSON.stringify(r.contact));
-        window.location.assign("./confirmation.html?orderId=" + r.orderId);
+        localStorage.setItem("user", JSON.stringify(r.contact));
+        window.location.assign("/Front/html/validation.html?orderId=" + r.orderId);
       })
       .catch((e) => {
         console.error("erreur : " + e.name);

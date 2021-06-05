@@ -27,9 +27,7 @@ class Order {
     let html = "";
     let i = 0;
     let item;
-    let item2;
     let total = 0;
-    let anything = true;
 
     try {
       for (const [key, value] of Object.entries(this.content)) {
@@ -152,20 +150,20 @@ class Order {
       <input type="text" name="city" id="city" placeholder="Ville" pattern="^[A-Za-z][A-Za-zÀ-ÿ]*([ '-]?[A-Za-zÀ-ÿ]+)*$" required oninput="data.Page.checkFormField(this,'Doit contenir au moins 2 lettres qui peuvent être séparées par un espace, un tiret ou une apostrophe')">
       <div id="cityWarning"></div>
       <label for="email">Adresse de messagerie<span>*</span></label>
-      <input type="email" name="email" id="email"  placeholder="E-mail" pattern="^[a-zA-Z0-9À-ÿ!#$%&'*+/=?^_\`{|}~-]+(?:\.[a-zA-Z0-9À-ÿ!#$%&'*+/=?^_\`{|}~-]+)*@(?:[a-zA-ZÀ-ÿ0-9](?:[a-zA-ZÀ-ÿ0-9-]*[a-zA-ZÀ-ÿ0-9])?\.)+[a-zA-ZÀ-ÿ0-9]{1,4}$" required oninput="data.Page.checkFormField(this,'Doit respecter le format email')">
+      <input type="email" name="email" id="email"  placeholder="E-mail" pattern="[a-zA-Z0-9À-ÿ!#$%&'*+/=?^_\`{|}~-]+(\.[a-zA-Z0-9À-ÿ!#$%&'*+/=?^_\`{|}~-]+)*@([a-zA-ZÀ-ÿ0-9]+\.)+[a-zA-ZÀ-ÿ0-9]{2,}" required oninput="data.Page.checkFormField(this,'Doit respecter le format email : anything@email.com')">
       <div id="emailWarning"></div>
       <button id="submit" type="submit">Finaliser la commande</button>
       <p class="notice">Les champs marqués d'un <span>*</span> sont obligatoires afin de pouvoir valider votre commande</p>
     `;
       this.previousUser();
-     // this.listen(total);
+      this.listen(total);
     } else document.getElementById("orderForm").innerHTML = ``;
   }
 
   /**
    * Checks if a user is already registered and if it's the case adds the user informations in the form
    */
-  previousUser() {
+  previousUser() {0
     let user = JSON.parse(localStorage.getItem("user"));
     if (user != null) {
       document.getElementById("firstName").value = user.firstName;
@@ -177,22 +175,44 @@ class Order {
   }
 
   /**
-   *
+   * Watches the clicks on the submit button, then send the total priuce to the localstorage and valids the order
    * @param {Number} price the total price of the cart
    */
   listen(price) {
     const btn = document.getElementById("submit");
-    price = price;
 
-    btn.addEventListener("submit", (e) => {
+    btn.addEventListener("submit", e => {
       e.preventDefault();
+      localStorage.setItem("price", price);
       this.validOrder();
     });
   }
 
+  /**
+   * Regroups all infos concerning the order and sends them under a string format to be used for a fetch request
+   */
+  validOrder() {
+    let contact =  {
+      firstName: document.getElementById("firstName").value,
+      lastName: document.getElementById("lastName").value,
+      address: document.getElementById("address").value,
+      city: document.getElementById("city").value,
+      email: document.getElementById("email").value
+    };
+    let products = data.Cart.content;
+    let allInfos = JSON.stringify({
+      contact,
+      products
+    });
+    data.DataFetcher.postOrder(allInfos);
+  }
+
+  /**
+   * Checks the validity of the field given in parameter and if it's invalid sends a warning message
+   * @param {HTMLElement} domTarget The HTML element to check for validity  
+   * @param {STring} msg            The message to implement
+   */
   checkFormField(domTarget, msg) {
-    console.log(domTarget.validity.valid);
-    console.log(msg);
     if (domTarget.validity.valid)
       document.getElementById(domTarget.id + "Warning").innerHTML = "";
     else document.getElementById(domTarget.id + "Warning").innerHTML = msg;

@@ -35,7 +35,6 @@ class Order {
       for (const [key, value] of Object.entries(this.content)) {
         i++;
         item = await data.DataFetcher.getItem(key);
-        console.log({ ...value, ...item, number: i });
         html += this.itemHTML({
           ...value,
           ...item,
@@ -43,17 +42,13 @@ class Order {
         });
         total += (item.price * value.howMany) / 100;
       }
-      if (html === "") {
-        html = this.noItemHTML();
-        anything = false;
-      }
+      if (html === "") html = this.noItemHTML();
     } catch (e) {
       console.error(e);
       html = errorHTML();
-      anything = false;
     }
     this.domTarget.innerHTML = html;
-    if (anything) this.displayTotal(total);
+    this.displayTotal(total);
   }
 
   /**
@@ -79,22 +74,24 @@ class Order {
       </td>
       <td>
         <div class="howMany">
-          <div class="subBtn">
-            <i class="fas fa-minus"></i>
-          </div>
+            <i class="fas fa-minus" onclick="data.Page.subOne('${
+              item._id
+            }')"></i>
           <input type="text" class="field" value="${
             item.howMany
           }" aria-label="Nombre d'ours voulus">
-          <div class="addBtn">
-            <i class="fas fa-plus"></i>
-          </div>
+            <i class="fas fa-plus" onclick="data.Page.addOne('${
+              item._id
+            }')"></i>
         </div>
       </td>
       <td>
         <p>total = ${(item.howMany * item.price) / 100},00€</p>
       </td>
       <td>
-        <i class="fas fa-trash-alt trashIcon"></i>
+        <i class="fas fa-trash-alt trashIcon" onclick="data.Page.trashItem('${
+          item._id
+        }')"></i>
       </td>
     </tr>
 	`;
@@ -123,22 +120,25 @@ class Order {
    * @param {Number} total  Total price of the cart the user desires
    */
   displayTotal(total) {
-    document.querySelector("tfoot.orderPrice").innerHTML = `
-      <tr>
+    if (total)
+      document.querySelector("tfoot.orderPrice").innerHTML = `
+      <tr class="totalContainer">
         <td class="totalCart" >
           <p>Total du panier = <span id="total">${total}</span>,00€</p>
         </td>
       </tr>
     `;
-    this.displayForm();
-    this.listen(total);
+    else document.querySelector("tfoot.orderPrice").innerHTML = ``;
+    this.displayForm(total);
   }
 
   /**
-   * displays the form if the user has ordered something
+   * If the user has ordered something, displays the form for the completion of the order
+   * @param {Number} total  the total price of the cart
    */
-  displayForm() {
-    document.getElementById("orderForm").innerHTML = /*html*/ `
+  displayForm(total) {
+    if (total) {
+      document.getElementById("orderForm").innerHTML = /*html*/ `
       <label for="firstName">Prénom<span>*</span></label>
       <input type="text" name="firstName" id="firstName" placeholder="Prénom" pattern="^[a-zA-Z]{1}[a-zA-Z'À-ÿ -]+$" required oninput="orinoco.page.checkField(this,'Ne doit contenir que des lettres (au moins 2)')">
       <label for="lastName">Nom de famille<span>*</span></label>
@@ -149,10 +149,12 @@ class Order {
       <input type="text" name="city" id="city" placeholder="Ville"   pattern="^[a-zA-Z]{1}[a-zA-Z'À-ÿ -]+$" required oninput="orinoco.page.checkField(this,'Ne doit contenir que des lettres (au moins 2)')">
       <label for="email">Adresse de messagerie<span>*</span></label>
       <input type="email" name="email" id="email"  placeholder="E-mail" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([_\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})" required oninput="orinoco.page.checkField(this,'Doit respecter le format email')">
-      <button id="submit type="submit">Finaliser la commande</button>
+      <button id="submit" type="submit">Finaliser la commande</button>
       <p class="notice">Les champs marqués d'un <span>*</span> sont obligatoires afin de pouvoir valider votre commande</p>
     `;
-    this.previousUser();
+      this.previousUser();
+      this.listen(total);
+    } else document.getElementById("orderForm").innerHTML = ``;
   }
 
   /**
@@ -160,7 +162,7 @@ class Order {
    */
   previousUser() {
     let user = JSON.parse(localStorage.getItem("user"));
-    if(user != null){
+    if (user != null) {
       document.getElementById("firstName").value = user.firstName;
       document.getElementById("lastName").value = user.lastName;
       document.getElementById("address").value = user.address;
@@ -174,43 +176,55 @@ class Order {
    * @param {Number} price the total price of the cart
    */
   listen(price) {
-    let sub = document.getElementsByClassName("subBtn");
-    let add = document.getElementsByClassName("addBtn");
-    let trash = document.getElementsByClassName("trashIcon");
-
-    for (let i = 0; i < sub.length; i++) {
-      console.log(sub[i]);
-      sub[i].addEventListener("click", this.subOne);      //onclick="data.Page.subOne('${item._id}')"
-      add[i].addEventListener("click", this.addOne);      //onclick="data.Page.addOne('${item._id}')"
-      trash[i].addEventListener("click", this.trashItem); //onclick="data.Page.trashItem('${item._id}')"
-    }
-
-    price = price;
     //this.checkFormFields();
     this.listenForm(price);
   }
 
-  subOne() {
-    alert("yes");
-
-  }
-
-  addOne() {
-    alert("no");
-  }
-
-  trashItem() {
-    alert("maybe");
-  }
-
-  checkFormFields() {}; //need param onclick?
+  checkFormFields() {} //need param onclick?
 
   listenForm(price) {
     const btn = document.getElementById("submit");
+    price = price;
 
-    btn.addEventListener("submit",e => {
+    btn.addEventListener("submit", (e) => {
       e.preventDefault();
       this.validOrder();
-    })
+    });
+  }
+
+  /**
+   * Substract one given item from the cart and displays the new cart.
+   * If it was the last iteration of the given item calls trashItem instead.
+   * @param {String} itemId   Id of the selected item
+   */
+  subOne(itemId) {
+    data.Cart.sub(itemId);
+    if (this.content[itemId].howMany == 1) this.trashItem(itemId);
+    else {
+      this.content[itemId].howMany--;
+      this.displayOrder();
+    }
+  }
+
+  /**
+   * Adds one given item to the cart and displays the new cart.
+   * @param {String} itemId   Id of the selected item
+   */
+  addOne(itemId) {
+    data.Cart.add(itemId);
+    this.content[itemId].howMany++;
+    this.displayOrder();
+  }
+
+  /**
+   * Removes all iterations of the given item from the cart after asking the user if he wants to confirm the supression.
+   * @param {String} itemId   Id of the selected item
+   */
+  trashItem(itemId) {
+    if (confirm("Voulez vous vraiment abandonner cet ourson ?")) {
+      data.Cart.delete(itemId);
+      delete this.content[itemId];
+      this.displayOrder();
+    }
   }
 }

@@ -12,8 +12,8 @@ class Cart {
    */
   render() {
     this.DOM.innerHTML = `<a href="./order.html" class="cartIcon">
+      <p>Mon Panier</p>
 		  <i class="fas fa-shopping-cart"> ${this.content.length}</i>
-		  <p>Mon Panier</p>
 		</a>`;
   }
 

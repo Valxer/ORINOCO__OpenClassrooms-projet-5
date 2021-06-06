@@ -1,3 +1,9 @@
+@mixin phoneonly {
+	@media screen and (max-width: map-get($breakpoints , phone )) {
+		@content;
+	}
+}
+
 @mixin tabletanddesktop {
 	@media screen and (min-width: map-get($breakpoints, tablet-min)) {
 	  @content;

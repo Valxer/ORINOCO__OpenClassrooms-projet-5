@@ -6,6 +6,18 @@ $Wheat: #f2db8d;
 $Brownish: #96896e;
 $Text: #221E24;
 
+// Teddybears Colors ==============
+$tan: tan;
+$chocolate: chocolate;
+$black: $Text;
+$white: wheat;
+$paleBrown: #987654;
+$darkBrown: #654321;
+$brown: brown;
+$blue: blue;
+$pink: pink;
+$beige: beige;
+
 // Breakpoints ====================
 $breakpoints: (
   phone: 767px,
@@ -15,3 +27,8 @@ $breakpoints: (
   desktop-max: 1439px,
   bigscreen: 1440px,
 );
+
+// Nbr d'items à display ===========
+$itemnbr: 5;
+$rownbr: 2;
+$columnnbr: 6;

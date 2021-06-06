@@ -54,7 +54,7 @@ body {
 body::before {
   z-index: -1;
   content: "";
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -66,7 +66,7 @@ body::before {
 body::after {
   z-index: -1;
   content: "";
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -176,50 +176,78 @@ ul.links {
   justify-content: space-between;
   align-items: center;
 }
+@media screen and (min-width: 768px) {
+  .itemHolder {
+    width: 90%;
+  }
+}
+.itemHolder h2 {
+  text-align: center;
+  font-size: 3rem;
+}
 
 .cardContainer {
   display: grid;
   margin: 2rem 2rem 5rem 2rem;
-  grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(5, 1fr);
-  grid-template-areas: "card1 card1 card1 card1 card1 card1" "card2 card2 card2 card2 card2 card2" "card3 card3 card3 card3 card3 card3" "card4 card4 card4 card4 card4 card4" "card5 card5 card5 card5 card5 card5";
   gap: 3rem;
 }
 @media screen and (min-width: 768px) {
   .cardContainer {
+    grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(2, 1fr);
     grid-template-areas: "card1 card1 card2 card2 card3 card3" ". card4 card4 card5 card5 .";
   }
 }
 
+@media screen and (min-width: 768px) {
+  .card1 {
+    grid-area: card1;
+  }
+
+  .card2 {
+    grid-area: card2;
+  }
+
+  .card3 {
+    grid-area: card3;
+  }
+
+  .card4 {
+    grid-area: card4;
+  }
+
+  .card5 {
+    grid-area: card5;
+  }
+}
 .teddyCard {
   position: relative;
   box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
-}
-.teddyCard.card1 {
-  grid-area: card1;
-}
-.teddyCard.card2 {
-  grid-area: card2;
-}
-.teddyCard.card3 {
-  grid-area: card3;
-}
-.teddyCard.card4 {
-  grid-area: card4;
-}
-.teddyCard.card5 {
-  grid-area: card5;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.3);
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
 }
 .teddyCard a {
   width: 100%;
   height: 100%;
 }
+.teddyCard a:hover {
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22);
+  transform: scale(1.2);
+  transition: 300ms;
+}
 .teddyCard a figure {
+  position: relative;
   width: 100%;
   height: 100%;
 }
 .teddyCard a figure img {
+  opacity: 0.9;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
   width: 100%;
   height: 70%;
   object-fit: cover;
@@ -232,7 +260,54 @@ ul.links {
   height: 28%;
   padding: 0.5rem 1rem 0 1rem;
 }
-.teddyCard a figure figcaption p {
+.teddyCard a figure figcaption .cardNumber {
+  position: absolute;
+  top: 0;
+  right: 15px;
+  font-size: 5em;
+  color: rgba(188, 165, 199, 0.7);
+}
+.teddyCard a figure figcaption .colors {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.teddyCard a figure figcaption .colors i {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  margin: 0 0.2rem;
+  font-size: 1.2rem;
+}
+.teddyCard a figure figcaption .colors i.tanColor {
+  color: tan;
+}
+.teddyCard a figure figcaption .colors i.chocolateColor {
+  color: chocolate;
+}
+.teddyCard a figure figcaption .colors i.blackColor {
+  color: #221E24;
+}
+.teddyCard a figure figcaption .colors i.whiteColor {
+  color: wheat;
+}
+.teddyCard a figure figcaption .colors i.paleBrownColor {
+  color: #987654;
+}
+.teddyCard a figure figcaption .colors i.darkBrownColor {
+  color: #654321;
+}
+.teddyCard a figure figcaption .colors i.brownColor {
+  color: brown;
+}
+.teddyCard a figure figcaption .colors i.blueColor {
+  color: blue;
+}
+.teddyCard a figure figcaption .colors i.pinkColor {
+  color: pink;
+}
+.teddyCard a figure figcaption .colors i.beigeColor {
+  color: beige;
+}
+.teddyCard a figure figcaption .colors p {
   margin-top: 1rem;
   width: 100%;
   text-align: center;

@@ -34,6 +34,7 @@ class Home {
 			  <figure>
 				  <img src="${item.imageUrl}" alt="${item.name}">
 				  <figcaption>
+            <span class= "cardNumber">0${nbr}</span>
 				    <h3 id="h3">${item.name}</h3>
             <span class="colors">${this.displayColor(item.colors)}</span>
             <span class="price">${item.price / 100},00€</span>
@@ -54,7 +55,7 @@ class Home {
   displayColor(colors) {
     let html = "";
     for (let i = 0; i < colors.length; i++) {
-      html += `<i class="fas fa-paint-brush ${this.colorToClass(colors[i])}" ></i>`;
+      html += `<i class="fas fa-circle ${this.colorToClass(colors[i])}" ></i>`;
     }
     return html;
   }

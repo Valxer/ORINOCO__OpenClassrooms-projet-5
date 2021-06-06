@@ -3,7 +3,6 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 1rem 1.5rem;
   align-items: center;
   background: $Mauve;
 }
@@ -14,7 +13,7 @@ ul {
   justify-content: space-between;
   align-items: center;
   &.social {
-    padding: 0 15%;
+    padding: 1.5rem 15% 0 15%;
     font-size: 2rem;
     @include tabletanddesktop {
       padding: 1.5rem 35% 0 35%;
@@ -22,7 +21,7 @@ ul {
     }
   }
   &.links {
-    padding: 1.5rem 0 0 0;
+    padding: 1rem 0;
     font-size: 1.2rem;
     flex-direction: column;
     height: 13ch;

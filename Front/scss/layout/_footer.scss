@@ -1,0 +1,36 @@
+footer {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  align-items: center;
+  background: $Mauve;
+}
+
+ul {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &.social {
+    padding: 0 15%;
+    font-size: 2rem;
+    @include tabletanddesktop {
+      padding: 1.5rem 35% 0 35%;
+      font-size: 3rem;
+    }
+  }
+  &.links {
+    padding: 1.5rem 0 0 0;
+    font-size: 1.2rem;
+    flex-direction: column;
+    height: 13ch;
+    @include tabletanddesktop {
+      flex-direction: row;
+      justify-content: space-evenly;
+      height: 8ch;
+      padding: 0;
+    }
+  }
+}

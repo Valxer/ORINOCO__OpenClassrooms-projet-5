@@ -1,0 +1,86 @@
+.presentation {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3rem 1.5rem;
+  h2 {
+    padding: 0 0 1.5rem 0;
+  }
+  p {
+    text-align: center;
+  }
+}
+
+.itemHolder {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardContainer {
+  display: grid;
+  margin: 2rem 2rem 5rem 2rem;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-template-areas:
+    "card1 card1 card1 card1 card1 card1"
+    "card2 card2 card2 card2 card2 card2"
+    "card3 card3 card3 card3 card3 card3"
+    "card4 card4 card4 card4 card4 card4"
+    "card5 card5 card5 card5 card5 card5";
+  @include tabletanddesktop {
+    grid-template-rows: repeat(2, 1fr);
+	grid-template-areas:
+    "card1 card1 card2 card2 card3 card3"
+    ". card4 card4 card5 card5 ."
+  }
+  gap: 3rem;
+}
+.teddyCard {
+	position: relative;
+	box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+  &.card1 {
+    grid-area: card1;
+  }
+  &.card2 {
+    grid-area: card2;
+  }
+  &.card3 {
+    grid-area: card3;
+  }
+  &.card4 {
+    grid-area: card4;
+  }
+  &.card5 {
+    grid-area: card5;
+  }
+  a {
+    width: 100%;
+    height: 100%;
+    figure {
+      width: 100%;
+      height: 100%;
+      img {
+		  width:100%;
+        height:70%;
+        object-fit: cover;
+      }
+	  figcaption {
+		  display: flex;
+		  justify-content: space-between;
+		  align-items: center;
+		  flex-wrap: wrap;
+		  height: 28%;;
+		  padding: 0.5rem 1rem 0 1rem;
+		  p {
+			  margin-top: 1rem;
+			  width: 100%;
+			  text-align: center;
+		  }
+	  }
+    }
+  }
+}

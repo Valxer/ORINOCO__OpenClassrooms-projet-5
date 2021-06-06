@@ -14,11 +14,18 @@ ul {
   list-style: none;
 }
 
+h1 {
+  font-size: 4rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  overflow-x: hidden;
 }
 
 body {
@@ -33,9 +40,10 @@ body {
 }
 
 main {
+  width: 100vw;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -145,6 +153,89 @@ ul.links {
     height: 8ch;
     padding: 0;
   }
+}
+
+.presentation {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3rem 1.5rem;
+}
+.presentation h2 {
+  padding: 0 0 1.5rem 0;
+}
+.presentation p {
+  text-align: center;
+}
+
+.itemHolder {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardContainer {
+  display: grid;
+  margin: 2rem 2rem 5rem 2rem;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-template-areas: "card1 card1 card1 card1 card1 card1" "card2 card2 card2 card2 card2 card2" "card3 card3 card3 card3 card3 card3" "card4 card4 card4 card4 card4 card4" "card5 card5 card5 card5 card5 card5";
+  gap: 3rem;
+}
+@media screen and (min-width: 768px) {
+  .cardContainer {
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas: "card1 card1 card2 card2 card3 card3" ". card4 card4 card5 card5 .";
+  }
+}
+
+.teddyCard {
+  position: relative;
+  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+}
+.teddyCard.card1 {
+  grid-area: card1;
+}
+.teddyCard.card2 {
+  grid-area: card2;
+}
+.teddyCard.card3 {
+  grid-area: card3;
+}
+.teddyCard.card4 {
+  grid-area: card4;
+}
+.teddyCard.card5 {
+  grid-area: card5;
+}
+.teddyCard a {
+  width: 100%;
+  height: 100%;
+}
+.teddyCard a figure {
+  width: 100%;
+  height: 100%;
+}
+.teddyCard a figure img {
+  width: 100%;
+  height: 70%;
+  object-fit: cover;
+}
+.teddyCard a figure figcaption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 28%;
+  padding: 0.5rem 1rem 0 1rem;
+}
+.teddyCard a figure figcaption p {
+  margin-top: 1rem;
+  width: 100%;
+  text-align: center;
 }
 
 /*# sourceMappingURL=style.css.map */

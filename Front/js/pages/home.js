@@ -12,7 +12,7 @@ class Home {
     try {
       const items = await data.DataFetcher.fetchItems();
       for (let i = 0; i < items.length; i++) {
-        content += this.getHtml(items[i]);
+        content += this.getHtml(items[i], (i + 1));
       }
     } catch (err) {
       console.error(err);
@@ -23,21 +23,22 @@ class Home {
   /**
    *Generates HTML for the object given
    * @param	{Object}	item	item properties
+   * @param {Number}  nbr   the number of the card
    *
    * @return {String}		Html text to implement
    */
-  getHtml(item) {
-    return /*html*/ `
-		<article class="teddyCard">
+  getHtml(item, nbr) {
+    return `
+		<article class="teddyCard card${nbr}">
 			<a href="./item.html?_id=${item._id}">
 			  <figure>
-				<img src="${item.imageUrl}" alt="${item.name}">
-				<figcaption>
-				  <h3 id="h3">${item.name}</h3>
-				  <span class="displayColor">${this.displayColor(item.colors)}</span>
-				  <span class="price">${item.price / 100},00€</span>
-				  <p>${item.description}</p>
-				</figcaption>
+				  <img src="${item.imageUrl}" alt="${item.name}">
+				  <figcaption>
+				    <h3 id="h3">${item.name}</h3>
+            <span class="colors">${this.displayColor(item.colors)}</span>
+            <span class="price">${item.price / 100},00€</span>
+				    <p>${item.description}</p>
+				  </figcaption>
 			  </figure>
 			</a>
 		</article>
@@ -53,7 +54,7 @@ class Home {
   displayColor(colors) {
     let html = "";
     for (let i = 0; i < colors.length; i++) {
-      html += `<i class="fas fa-circle ${this.colorToClass(colors[i])}" ></i>`;
+      html += `<i class="fas fa-paint-brush ${this.colorToClass(colors[i])}" ></i>`;
     }
     return html;
   }

@@ -11,7 +11,7 @@ class Cart {
    * creates the HTML input depending in the number of articles
    */
   render() {
-    this.DOM.innerHTML = `<a href="./order.html" class="iconCart">
+    this.DOM.innerHTML = `<a href="./order.html" class="cartIcon">
 		  <i class="fas fa-shopping-cart"> ${this.content.length}</i>
 		  <p>Mon Panier</p>
 		</a>`;

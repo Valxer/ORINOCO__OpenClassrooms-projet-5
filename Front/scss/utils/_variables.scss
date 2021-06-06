@@ -1,0 +1,15 @@
+// Color Theme Swatches in Hex ===
+$Mauve: #BCA5C7;
+$Purple: #82449E;
+$Lilas: #e2e0f1;
+$Wheat: #F2DB8D;
+$Brownish: #96896E;
+
+// Breakpoints ====================
+$breakpoints: (
+  tablet-min: 800px,
+  tablet-max: 1024px,
+  desktop: 1025px,
+  desktop-max:1439px,
+  bigscreen: 1440px
+);

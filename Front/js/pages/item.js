@@ -24,17 +24,22 @@ class Item {
    */
   getHtml(item) {
     return `
-    <article class="teddyCard">
+    <article class="singleTeddyCard">
       <figure>
         <img src="${item.imageUrl}" alt="Ours ${item.name}">
       </figure>
       <section>
-        <div class="itemTitle">
+        <div class="itemName">
           <h2>${item.name}</h2>
           <span class="price">${item.price / 100},00€</span>
         </div>
         <p class="itemDescription">${item.description}</p>
+        <label for="colors">Choisir sa couleur : </label>
+        <select name="colors" id="colors">
+            ${this.displayChoice(item.colors)}
+        </select>
         <div class="itemNumber">
+        <p>Choisir le Nombre : </p>
           <div class="subBtn"id="subBtn">
             <i class="fas fa-minus"></i>
           </div>
@@ -43,15 +48,9 @@ class Item {
             <i class="fas fa-plus"></i>
           </div>
         </div>
-        <div class="colorSection">
-          <div class="displayColor">
-            ${this.displayColors(item.colors)}
-          </div>
-          <label for="colors">Choisir sa couleur </label>
-          <select name="colors" id="colors">
-            ${this.displayChoice(item.colors)}
-          </select>
-        </div>
+        <div class="displayColor">
+          ${this.displayColors(item.colors)}
+        </div>  
         <input class="orderBtn" id="orderBtn" type="button" value="Ajouter au panier">
       </section>
     </article>

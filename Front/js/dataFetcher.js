@@ -73,7 +73,6 @@ class DataFetcher {
     fetch("http://localhost:3000/api/teddies/order", {
       method: "POST",
       headers: {
-        Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: data
@@ -81,9 +80,9 @@ class DataFetcher {
       .then((res) => {
         return res.json();
       })
-      .then((r) => {
-        localStorage.setItem("user", JSON.stringify(r.contact));
-        window.location.assign("/Front/html/validation.html?orderId=" + r.orderId);
+      .then((res) => {
+        localStorage.setItem("user", JSON.stringify(res.contact));
+        window.location.assign("/Front/html/validation.html?orderId=" + res.orderId);
       })
       .catch((e) => {
         console.error("erreur : " + e.name);

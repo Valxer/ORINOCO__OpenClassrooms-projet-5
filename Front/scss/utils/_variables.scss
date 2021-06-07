@@ -25,10 +25,12 @@ $breakpoints: (
   tablet-max: 1024px,
   desktop: 1025px,
   desktop-max: 1439px,
-  bigscreen: 1440px,
+  bigscreen: 1440px
 );
 
 // Nbr d'items à display ===========
 $itemnbr: 5;
-$rownbr: 2;
-$columnnbr: 6;
+$deksrow: 2;
+$deskcolumn: 6;
+$tabletrow: 3;
+$tabletcolumn: 4;

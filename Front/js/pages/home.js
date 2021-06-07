@@ -41,6 +41,9 @@ class Home {
 				    <p>${item.description}</p>
 				  </figcaption>
 			  </figure>
+        <div class="hoverCard">
+          <p>Adopte le</p>
+        </div>
 			</a>
 		</article>
 	  `;

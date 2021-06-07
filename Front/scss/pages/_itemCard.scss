@@ -1,0 +1,83 @@
+.itemTitle {
+  font-size: 3rem;
+  margin-top: 4rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.itemText {
+  width: 90%;
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.itemCard {
+  width: 80%;
+  .singleTeddyCard {
+    margin: auto;
+    position: relative;
+    box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.3);
+    overflow: hidden;
+    text-align: center;
+    width: 100%;
+    max-width: 1275px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5rem;
+    img {
+      width: 100%;
+      object-fit: cover;
+    }
+    .itemName {
+      margin-bottom: 1rem;
+    }
+    .itemDescription {
+      margin-bottom: 1rem;
+    }
+    .itemNumber {
+      display: flex;
+      justify-content: center;
+      p {
+        margin-right: 0.5rem;
+      }
+      .subBtn {
+        margin-right: 0.5rem;
+      }
+      .addBtn {
+        margin-left: 0.5em;
+      }
+      input {
+        width: 30px;
+        text-align: center;
+      }
+    }
+    .displayColor {
+      position: absolute;
+      top: 8vw;
+      right: 15px;
+      display: flex;
+      flex-direction: column;
+      .fas {
+        text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+        font-size: clamp(10px,7vw,110px);
+        margin-bottom: 3vw;
+        @include colorCircles;
+      }
+    }
+    .orderBtn {
+      margin: 50px 0px 50px 0px;
+      width: clamp(150px, 40%, 250px);
+      border-radius: 30px;
+      border-style: none;
+      background: $Purple;
+      color: white;
+      text-align: center;
+      padding: 15px 0px;
+      box-shadow: -3px 3px 5px rgb(200, 200, 200);
+    }
+  }
+}

@@ -200,11 +200,11 @@ class Order {
       email: document.getElementById("email").value
     };
     let products = data.Cart.content;
-    let allInfos = JSON.stringify({
+    let data = JSON.stringify({
       contact,
       products
     });
-    data.DataFetcher.postOrder(allInfos);
+    data.DataFetcher.postOrder(data);
   }
 
   /**

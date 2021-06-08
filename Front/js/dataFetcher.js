@@ -69,13 +69,13 @@ class DataFetcher {
    *
    * @param   {String}  data  string containing personnal informations and all the products in the order
    */
-  postOrder(data) {
+  postOrder(datas) {
     fetch("http://localhost:3000/api/teddies/order", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: data
+      body: datas
     })
       .then((res) => {
         return res.json();

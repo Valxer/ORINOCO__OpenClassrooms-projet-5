@@ -144,7 +144,7 @@ class Order {
       <label for="email">Adresse de messagerie<span>*</span></label>
       <input type="email" name="email" id="email"  placeholder="E-mail" pattern="[a-zA-Z0-9À-ÿ!#$%&'*+/=?^_\`{|}~-]+(\.[a-zA-Z0-9À-ÿ!#$%&'*+/=?^_\`{|}~-]+)*@([a-zA-ZÀ-ÿ0-9]+\.)+[a-zA-ZÀ-ÿ0-9]{2,}" required oninput="data.Page.checkFormField(this,'Doit respecter le format email : anything@email.com')">
       <div id="emailWarning"></div>
-      <button id="submit" type="submit">Finaliser la commande</button>
+      <button id="send" type="submit">Finaliser la commande</button>
       <p class="notice">Les champs marqués d'un <span>*</span> sont obligatoires afin de pouvoir valider votre commande</p>
     `;
       this.previousUser();
@@ -171,12 +171,13 @@ class Order {
    * @param {Number} price the total price of the cart
    */
   listen(price) {
-    const btn = document.getElementById("submit");
-
-    btn.addEventListener("submit", e => {
+    document.getElementById("send").addEventListener('click', function(e){
+      let i = data.Page;
       e.preventDefault();
       localStorage.setItem("price", price);
-      this.validOrder();
+      console.log(data.Page);
+      console.log(i);
+      i.validOrder();
     });
   }
 
@@ -191,12 +192,14 @@ class Order {
       city: document.getElementById("city").value,
       email: document.getElementById("email").value
     };
+    console.log(data);
     let products = data.Cart.content;
-    let data = JSON.stringify({
+    let datas = JSON.stringify({
       contact,
       products
     });
-    data.DataFetcher.postOrder(data);
+    console.log (datas);
+    data.DataFetcher.postOrder(datas);
   }
 
   /**

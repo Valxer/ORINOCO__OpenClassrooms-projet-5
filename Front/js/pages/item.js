@@ -43,7 +43,7 @@ class Item {
           <div class="subBtn"id="subBtn">
             <i class="fas fa-minus"></i>
           </div>
-          <input type="text" class="field" id="field" value="1" aria-label="Nombre d'oursons désirés">
+          <input type="number" disabled class="field" id="field" value="1" aria-label="Nombre d'oursons désirés">
           <div class="addBtn" id="addBtn">
             <i class="fas fa-plus"></i>
           </div>

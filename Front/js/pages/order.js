@@ -63,35 +63,29 @@ class Order {
    */
   itemHTML(item) {
     return `
-	<tr>
-      <td>
+    <div class="orderItem">
+      <figure class="orderItem__image">
         <img src="${item.imageUrl}" alt="ours ${item.number}">
-      </td>
-      <td>
+      </figure>
+      <div class="orderItem__details">
         <h3>${item.name}</h3>
-      </td>
-      <td>
         <div class="howMany">
             <i class="fas fa-minus" onclick="data.Page.subOne('${
               item._id
             }')"></i>
-          <input type="text" class="field" value="${
+          <input type="number" disabled class="field" value="${
             item.howMany
           }" aria-label="Nombre d'ours voulus">
             <i class="fas fa-plus" onclick="data.Page.addOne('${
               item._id
             }')"></i>
         </div>
-      </td>
-      <td>
-        <p>total = ${(item.howMany * item.price) / 100},00€</p>
-      </td>
-      <td>
+        <p>${(item.howMany * item.price) / 100},00€</p>
         <i class="fas fa-trash-alt trashIcon" onclick="data.Page.trashItem('${
           item._id
         }')"></i>
-      </td>
-    </tr>
+      </div>
+    </div>
 	`;
   }
 
@@ -119,12 +113,10 @@ class Order {
    */
   displayTotal(total) {
     if (total)
-      document.querySelector("tfoot.orderPrice").innerHTML = `
-      <tr class="totalContainer">
-        <td class="totalCart" >
-          <p>Total du panier = <span id="total">${total}</span>,00€</p>
-        </td>
-      </tr>
+      document.querySelector("div.orderPrice").innerHTML = `
+        <div class="totalCart" >
+          <p>Total du panier</br><span id="total">${total}</span>,00€</p>
+        </div>
     `;
     else document.querySelector("tfoot.orderPrice").innerHTML = ``;
     this.displayForm(total);

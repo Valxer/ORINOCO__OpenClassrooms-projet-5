@@ -27,12 +27,17 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 5rem;
-    //backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
     img {
       width: 100%;
       object-fit: cover;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
     }
     .itemName {
+      h2 {
+        font-size: 2rem;
+      }
       margin-bottom: 1rem;
     }
     .itemDescription {

@@ -17,14 +17,14 @@ class Validation {
 		data.Cart.deleteAll();
 		domTarget.innerHTML = `
 		<section class="validation">
-			<h1>${user.fisrtName}, votre achat est bien confirmé !</h1>
+			<h1>${user.firstName}, votre achat est bien confirmé !</h1>
 			<h2>En voici le détail</h2>
 			<ul>
 				<li>Référence : ${orderId}</li>
-				<li>Prix total : ${price}</li>
-				<li>Un mail contenant tous les détails de votre achat vous sera envoyé à ${user.email}</li>
+				<li class="space">Prix total : ${price},00 €</li>
+				<li class="space">Un mail contenant tous les détails de votre achat vous sera envoyé à ${user.email}</li>
 			</ul>
-			<p>Merci d'avoir choisi un compagnion Orinourson !</p>
+			<p class="space">Merci d'avoir choisi un compagnion Orinourson !</p>
 			<a href="/Front/html/index.html">
 				Retourner à l'accueil
 			</a>

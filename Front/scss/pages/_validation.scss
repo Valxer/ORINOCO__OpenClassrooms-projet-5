@@ -1,0 +1,29 @@
+.validationContent {
+	text-align: center;
+	section {
+		display: flex;
+	flex-direction: column;
+	align-items: center;
+	}
+	h1,h2 {
+		margin-bottom: 1rem;
+	}
+	ul {
+		display: flex;
+		flex-direction: column;
+	}
+	.space {
+		margin-bottom: 2rem;
+	}
+	a {
+		display: block;
+		width: clamp(250px, 40%, 350px);
+        border-radius: 30px;
+        border-style: none;
+        background: $Purple;
+        color: white;
+        text-align: center;
+        padding: 15px 0px;
+        box-shadow: -3px 3px 5px rgb(200, 200, 200);
+	}
+}

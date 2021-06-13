@@ -9,8 +9,13 @@
 		content="N'attendez plus pour valider votre panier et recevoir votre livraison de tendressse.">
 	<link rel="icon" type="image/png" href="../images/favicon.png">
 
-	<!-- styles + fontawesome -->
+	<!-- styles + fonts + fontawesome -->
 	<link rel="stylesheet" href="../style/style.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto&family=Shadows+Into+Light&display=swap"
+		rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/1cd9585249.js" crossorigin="anonymous"></script>
 
 	<!-- Page -->
@@ -41,18 +46,17 @@
 			demandées<br />Lorsque tout vous
 			semble en règle remplissez le formulaire sous votre panier pour finaliser la transaction.
 		</p>
-		<div class="orderGlobal">
+		<div class="orderGlobal" id="orderGlobal">
 			<div class="orderContent">
 				<!-- JS implemented-->
 			</div>
-			<div class="orderFinal">
+			<div class="orderFinal" id="orderFinal">
 				<div class=" orderPrice">
 					<!-- JS implemented-->
 				</div>
-				<h2 class="formTitle">Formulaire de finalisation</h2>
-				<form method="POST" class="orderForm" id="orderForm">
+				<div id ="orderFormContainer">
 					<!-- JS implemented-->
-				</form>
+				</div>
 			</div>
 		</div>
 	</main>

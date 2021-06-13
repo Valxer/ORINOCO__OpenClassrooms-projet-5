@@ -115,7 +115,8 @@ class Order {
     if (total)
       document.querySelector("div.orderPrice").innerHTML = `
         <div class="totalCart" >
-          <p>Total du panier</br><span id="total">${total}</span>,00€</p>
+          <h2>Total du panier</h2>
+          <p><span id="total">${total}</span>,00€</p>
         </div>
     `;
     else document.querySelector("tfoot.orderPrice").innerHTML = ``;
@@ -128,26 +129,41 @@ class Order {
    */
   displayForm(total) {
     if (total) {
-      document.getElementById("orderForm").innerHTML = /*html*/ `
-      <label for="firstName">Prénom<span>*</span></label>
-      <input type="text" name="firstName" id="firstName" placeholder="Prénom" pattern="^[A-Za-z][A-Za-zÀ-ÿ]*([ '-]?[A-Za-zÀ-ÿ]+)*$" required oninput="data.Page.checkFormField(this,'Doit contenir au moins 2 lettres qui peuvent être séparées par un espace, un tiret ou une apostrophe')">
-      <div id="firstNameWarning"></div>
-      <label for="lastName">Nom de famille<span>*</span></label>
-      <input type="text" name="lastName" id="lastName" placeholder="Nom" pattern="^[A-Za-z][A-Za-zÀ-ÿ]*([ '-]?[A-Za-zÀ-ÿ]+)*$" required oninput="data.Page.checkFormField(this,'Doit contenir au moins 2 lettres qui peuvent être séparées par un espace, un tiret ou une apostrophe')">
-      <div id="lastNameWarning"></div>
-      <label for="address">Adresse<span>*</span></label>
-      <input type="text" name="address" id="address" placeholder="Adresse" pattern="[a-zA-Z0-9À-ÿ '-]{2,}" required oninput="data.Page.checkFormField(this,'Doit contenir au moins 2 lettres ou chiffres qui peuvent être séparées par un espace, un tiret ou une apostrophe')">
-      <div id="addressWarning"></div>
-      <label for="city">Ville<span>*</span></label>
-      <input type="text" name="city" id="city" placeholder="Ville" pattern="^[A-Za-z][A-Za-zÀ-ÿ]*([ '-]?[A-Za-zÀ-ÿ]+)*$" required oninput="data.Page.checkFormField(this,'Doit contenir au moins 2 lettres qui peuvent être séparées par un espace, un tiret ou une apostrophe')">
-      <div id="cityWarning"></div>
-      <label for="email">Adresse de messagerie<span>*</span></label>
-      <input type="email" name="email" id="email"  placeholder="E-mail" pattern="[a-zA-Z0-9À-ÿ!#$%&'*+/=?^_\`{|}~-]+(\.[a-zA-Z0-9À-ÿ!#$%&'*+/=?^_\`{|}~-]+)*@([a-zA-ZÀ-ÿ0-9]+\.)+[a-zA-ZÀ-ÿ0-9]{2,}" required oninput="data.Page.checkFormField(this,'Doit respecter le format email : anything@email.com')">
-      <div id="emailWarning"></div>
-      <button id="send" type="submit">Finaliser la commande</button>
-      <p class="notice">Les champs marqués d'un <span>*</span> sont obligatoires afin de pouvoir valider votre commande</p>
+      document.getElementById("orderFormContainer").innerHTML = /*html*/ `
+      <h2 class="formTitle">Formulaire de finalisation</h2>
+			<form method="POST" class="orderForm" id="orderForm">
+				<div class="fields">
+          <label for="firstName">Prénom *</label>
+          <input type="text" name="firstName" id="firstName" placeholder="Prénom" pattern="^[A-Za-z][A-Za-zÀ-ÿ]*([ '-]?[A-Za-zÀ-ÿ]+)*$" required oninput="data.Page.checkFormField(this,'Doit contenir au moins 2 lettres qui peuvent être séparées par un espace, un tiret ou une apostrophe')">
+        </div>
+        <div class="warning" id="firstNameWarning"></div>
+        <div class="fields">
+          <label for="lastName">Nom *</label>
+          <input type="text" name="lastName" id="lastName" placeholder="Nom" pattern="^[A-Za-z][A-Za-zÀ-ÿ]*([ '-]?[A-Za-zÀ-ÿ]+)*$" required oninput="data.Page.checkFormField(this,'Doit contenir au moins 2 lettres qui peuvent être séparées par un espace, un tiret ou une apostrophe')">
+        </div>
+        <div class="warning" id="lastNameWarning"></div>
+        <div class="fields">
+          <label for="address">Adresse *</label>
+          <input type="text" name="address" id="address" placeholder="Adresse" pattern="[a-zA-Z0-9À-ÿ '-]{2,}" required oninput="data.Page.checkFormField(this,'Doit contenir au moins 2 lettres ou chiffres qui peuvent être séparées par un espace, un tiret ou une apostrophe')">
+        </div>
+        <div class="warning" id="addressWarning"></div>
+        <div class="fields">
+          <label for="city">Ville *</label>
+          <input type="text" name="city" id="city" placeholder="Ville" pattern="^[A-Za-z][A-Za-zÀ-ÿ]*([ '-]?[A-Za-zÀ-ÿ]+)*$" required oninput="data.Page.checkFormField(this,'Doit contenir au moins 2 lettres qui peuvent être séparées par un espace, un tiret ou une apostrophe')">
+        </div>
+        <div class="warning" id="cityWarning"></div>
+        <div class="fields">
+          <label for="email">Email *</label>
+          <input type="email" name="email" id="email"  placeholder="E-mail" pattern="[a-zA-Z0-9À-ÿ!#$%&'*+/=?^_\`{|}~-]+(\.[a-zA-Z0-9À-ÿ!#$%&'*+/=?^_\`{|}~-]+)*@([a-zA-ZÀ-ÿ0-9]+\.)+[a-zA-ZÀ-ÿ0-9]{2,}" required oninput="data.Page.checkFormField(this,'Doit respecter le format email : anything@email.com')">
+        </div>
+        <div class="warning" id="emailWarning"></div>
+        <p class="notice">Les champs marqués d'un * sont obligatoires afin de pouvoir valider votre commande</p>
+        <button id="send" type="submit">Finaliser la commande</button>
+      </form>
     `;
-      this.previousUser();
+    document.getElementById("orderFinal").classList.add("enabled");
+    document.getElementById("orderGlobal").classList.add("enabled");
+    this.previousUser();
       this.listen(total);
     } else document.getElementById("orderForm").innerHTML = ``;
   }
@@ -192,13 +208,11 @@ class Order {
       city: document.getElementById("city").value,
       email: document.getElementById("email").value
     };
-    console.log(data);
     let products = data.Cart.content;
     let datas = JSON.stringify({
       contact,
       products
     });
-    console.log (datas);
     data.DataFetcher.postOrder(datas);
   }
 

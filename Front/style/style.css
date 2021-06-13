@@ -1,5 +1,6 @@
 * {
   color: #221E24;
+  font-family: "Roboto";
 }
 
 a {
@@ -16,10 +17,17 @@ ul {
 
 h1 {
   font-size: 4rem;
+  font-family: "Lobster";
 }
 
 h2 {
   font-size: 1.5rem;
+  font-family: "Shadows into Light";
+}
+
+h3 {
+  font-family: "Shadows into Light";
+  font-size: 1.4rem;
 }
 
 * {
@@ -371,13 +379,19 @@ ul.links {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 5rem;
+  backdrop-filter: blur(5px);
 }
 .itemCard .singleTeddyCard img {
   width: 100%;
   object-fit: cover;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 .itemCard .singleTeddyCard .itemName {
   margin-bottom: 1rem;
+}
+.itemCard .singleTeddyCard .itemName h2 {
+  font-size: 2rem;
 }
 .itemCard .singleTeddyCard .itemDescription {
   margin-bottom: 1rem;
@@ -471,9 +485,13 @@ ul.links {
   margin-bottom: 4rem;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
+}
+.orderGlobal.enabled {
+  justify-content: space-around;
 }
 .orderGlobal .orderContent {
+  text-align: center;
   box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.4);
@@ -481,6 +499,7 @@ ul.links {
   width: 100%;
   padding: 0.5rem;
   margin-bottom: 3rem;
+  backdrop-filter: blur(5px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -488,17 +507,30 @@ ul.links {
 }
 @media screen and (min-width: 768px) {
   .orderGlobal .orderContent {
-    width: 70%;
+    width: 60%;
   }
 }
 .orderGlobal .orderContent .orderItem {
-  padding: 0.5rem;
+  padding: 0.5rem 0;
   width: 100%;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+}
+@media screen and (max-width: 767px) {
+  .orderGlobal .orderContent .orderItem {
+    flex-direction: column;
+  }
 }
 .orderGlobal .orderContent .orderItem__image {
-  width: 65%;
+  width: 90%;
+  margin: 0 auto;
+}
+@media screen and (min-width: 768px) {
+  .orderGlobal .orderContent .orderItem__image {
+    width: 65%;
+    min-width: 360px;
+  }
 }
 .orderGlobal .orderContent .orderItem__image img {
   border-radius: 20px;
@@ -525,12 +557,86 @@ ul.links {
   text-align: center;
 }
 .orderGlobal .orderFinal {
+  text-align: center;
+  display: none;
+}
+.orderGlobal .orderFinal.enabled {
+  display: block;
   width: 100%;
 }
 @media screen and (min-width: 768px) {
-  .orderGlobal .orderFinal {
-    width: 30%;
+  .orderGlobal .orderFinal.enabled {
+    width: clamp(240px, 25%, 300px);
   }
+}
+.orderGlobal .orderFinal.enabled .orderPrice {
+  margin-bottom: 1.5rem;
+}
+.orderGlobal .orderFinal.enabled .orderPrice p {
+  margin-top: 5px;
+}
+.orderGlobal .orderFinal.enabled .orderForm {
+  margin-top: 1rem;
+}
+.orderGlobal .orderFinal.enabled .fields {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px auto;
+}
+@media screen and (max-width: 767px) {
+  .orderGlobal .orderFinal.enabled .fields {
+    justify-content: space-around;
+  }
+}
+.orderGlobal .orderFinal.enabled input {
+  border-radius: 10px;
+  text-align: center;
+}
+.orderGlobal .orderFinal.enabled .notice, .orderGlobal .orderFinal.enabled .warning {
+  margin-top: 0.5rem;
+  font-size: 0.7rem;
+  font-style: italic;
+}
+.orderGlobal .orderFinal.enabled #send {
+  margin: 1rem auto;
+  width: clamp(150px, 40%, 250px);
+  border-radius: 30px;
+  border-style: none;
+  background: #82449e;
+  color: white;
+  text-align: center;
+  padding: 15px 0px;
+  box-shadow: -3px 3px 5px #c8c8c8;
+}
+
+.validationContent {
+  text-align: center;
+}
+.validationContent section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.validationContent h1, .validationContent h2 {
+  margin-bottom: 1rem;
+}
+.validationContent ul {
+  display: flex;
+  flex-direction: column;
+}
+.validationContent .space {
+  margin-bottom: 2rem;
+}
+.validationContent a {
+  display: block;
+  width: clamp(250px, 40%, 350px);
+  border-radius: 30px;
+  border-style: none;
+  background: #82449e;
+  color: white;
+  text-align: center;
+  padding: 15px 0px;
+  box-shadow: -3px 3px 5px #c8c8c8;
 }
 
 /*# sourceMappingURL=style.css.map */

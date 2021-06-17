@@ -46,8 +46,6 @@ class DataFetcher {
    * saves the order (cart.js) in localStorage
    *
    * @param   {Object}  cart  cart content
-   *
-   * @return  {[Type]}        [return description]
    */
   saveCart(cart) {
     localStorage.setItem("cart", JSON.stringify(cart));

@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
     "sass": "sass --watch ./scss:./style",
     "prefix": "postcss ./style/style.css --use autoprefixer -d ./style/"
   },
@@ -19,13 +18,5 @@
   },
   "homepage": "https://github.com/Valxer/KevinLeVanPhung_5_24052021#readme",
   "browserslist": "last 4 versions",
-  "type": "module",
-  "devDependencies": {
-    "@babel/core": "^7.14.3",
-    "@babel/preset-env": "^7.14.2",
-    "babel-loader": "^8.2.2",
-    "babel-polyfill": "^6.26.0",
-    "webpack": "^5.37.1",
-    "webpack-cli": "^4.7.0"
-  }
+  "type": "module"
 }

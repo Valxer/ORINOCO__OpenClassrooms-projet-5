@@ -1,3 +1,5 @@
+import data from '../../data';
+
 class Home {
   constructor(domTarget) {
     this.displayAllProducts(domTarget);
@@ -79,3 +81,5 @@ class Home {
     return colors.join("") + "Color";
   }
 }
+
+export default Home;

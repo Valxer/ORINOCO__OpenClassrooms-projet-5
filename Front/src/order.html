@@ -4,29 +4,18 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Descriptif de l'ourson | Orinoco</title>
-	<meta name="description" content="Choisissez votre ourson, choisissez sa couleur, attendez le bonheur.">
-	<link rel="icon" type="image/png" href="../images/favicon.png">
+	<title>Votre panier | Orinoco</title>
+	<meta name="description"
+		content="N'attendez plus pour valider votre panier et recevoir votre livraison de tendressse.">
+	<link rel="icon" type="image/png" href="../assets/images/favicon.png">
 
-	<!-- styles + fonts + fontawesome -->
-	<link rel="stylesheet" href="../style/style.css">
+	<!-- fonts + fontawesome -->
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto&family=Shadows+Into+Light&display=swap"
 		rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/1cd9585249.js" crossorigin="anonymous"></script>
-
-	<!-- Page -->
-	<script src="../js/pages/item.js"></script>
-
-	<!-- Cart -->
-	<script src="../js/cart.js"></script>
-
-	<!-- Fetcher -->
-	<script src="../js/dataFetcher.js"></script>
-	<script src="../js/index.js" defer></script>
-
 </head>
 
 <body>
@@ -36,17 +25,27 @@
 				<i class="fas fa-home homeLink__icon"></i>
 				<p>Accueil</p>
 			</a>
-			<img src="../images/logo.png" alt="Logo Orinoco" class="logo">
+			<img src="../assets/images/logo.png" alt="Logo Orinoco" class="logo">
 		</nav>
 	</header>
 	<main>
-		<h1 class="itemTitle">Découvrez votre Orinourson</h1>
-		<p class="itemText">
-			Vous avez choisi votre Orinourson ?<br />Personnalisez le en choisissant sa couleur et vous n'aurez plus
-			qu'à attendre la livraison de votre companion de réconfort !
+		<h1 class="orderTitle">Votre panier</h1>
+		<p class="orderText">Revoyez bien les éléments de votre commande et vérifiez bien les quantités
+			demandées<br />Lorsque tout vous
+			semble en règle remplissez le formulaire sous votre panier pour finaliser la transaction.
 		</p>
-		<div class="itemCard">
-			<!-- JS implemented-->
+		<div class="orderGlobal" id="orderGlobal">
+			<div class="orderContent">
+				<!-- JS implemented-->
+			</div>
+			<div class="orderFinal" id="orderFinal">
+				<div class=" orderPrice">
+					<!-- JS implemented-->
+				</div>
+				<div id ="orderFormContainer">
+					<!-- JS implemented-->
+				</div>
+			</div>
 		</div>
 	</main>
 	<footer>

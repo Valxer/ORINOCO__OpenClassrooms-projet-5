@@ -1,3 +1,6 @@
+import data from '../../data';
+import { extractId } from '../../data';
+
 class Item {
   constructor(domTarget, itemId) {
     this.displayItem(domTarget, itemId);
@@ -13,7 +16,7 @@ class Item {
     this.itemId = itemId;
     const item = await data.DataFetcher.getItem(this.itemId);
     domTarget[0].innerHTML = this.getHtml(item);
-    this.setCartOrder(this.itemId);
+    this.setCartOrder();
   }
 
   /**
@@ -120,9 +123,8 @@ class Item {
 
   /**
    * Watches the changes in the number of desired items using EventListener
-   * @param {String} itemId	Id of the item
    */
-  setCartOrder(itemId) {
+  setCartOrder() {
     let sub = document.getElementById("subBtn");
     let add = document.getElementById("addBtn");
     let order = document.getElementById("orderBtn");
@@ -165,3 +167,5 @@ class Item {
     alert("Vous avez bien ajouté " + baseNumber + " ours à votre panier.");
   }
 }
+
+export default Item;

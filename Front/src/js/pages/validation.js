@@ -1,3 +1,6 @@
+import data from '../../data';
+import { extractId } from '../../data';
+
 class Validation {
 	constructor(domTarget) {
 		this.domTarget = domTarget[0];
@@ -25,10 +28,12 @@ class Validation {
 				<li class="space">Un mail contenant tous les détails de votre achat vous sera envoyé à ${user.email}</li>
 			</ul>
 			<p class="space">Merci d'avoir choisi un compagnion Orinourson !</p>
-			<a href="/Front/html/index.html">
+			<a href="./index.html">
 				Retourner à l'accueil
 			</a>
 		</section>
 		`;
 	}
 }
+
+export default Validation;

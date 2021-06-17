@@ -46,6 +46,8 @@ class DataFetcher {
    * saves the order (cart.js) in localStorage
    *
    * @param   {Object}  cart  cart content
+   *
+   * @return  {[Type]}        [return description]
    */
   saveCart(cart) {
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -80,10 +82,12 @@ class DataFetcher {
       })
       .then((res) => {
         localStorage.setItem("user", JSON.stringify(res.contact));
-        window.location.assign("/Front/html/validation.html?orderId=" + res.orderId);
+        window.location.assign("./validation.html?orderId=" + res.orderId);
       })
       .catch((e) => {
         console.error("erreur : " + e.name);
       });
   }
 }
+
+export default DataFetcher;

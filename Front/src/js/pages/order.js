@@ -1,3 +1,5 @@
+import data from "../../data";
+
 class Order {
   content = {};
   constructor(domTarget) {
@@ -46,6 +48,7 @@ class Order {
       html = errorHTML();
     }
     this.domTarget.innerHTML = html;
+    this.listenQty(i);
     this.displayTotal(total);
   }
 
@@ -62,7 +65,7 @@ class Order {
    * @returns {String}						HTML text to implement
    */
   itemHTML(item) {
-    return `
+    const html = `
     <div class="orderItem">
       <figure class="orderItem__image">
         <img src="${item.imageUrl}" alt="ours ${item.number}">
@@ -70,23 +73,20 @@ class Order {
       <div class="orderItem__details">
         <h3>${item.name}</h3>
         <div class="howMany">
-            <i class="fas fa-minus" onclick="data.Page.subOne('${
-              item._id
-            }')"></i>
+            <i class="${item._id} fas fa-minus" id="minus${item.number}"></i>
           <input type="number" disabled class="field" value="${
             item.howMany
           }" aria-label="Nombre d'ours voulus">
-            <i class="fas fa-plus" onclick="data.Page.addOne('${
-              item._id
-            }')"></i>
+            <i class="${item._id} fas fa-plus" id="plus${item.number}"></i>
         </div>
         <p>${(item.howMany * item.price) / 100},00€</p>
-        <i class="fas fa-trash-alt trashIcon" onclick="data.Page.trashItem('${
-          item._id
-        }')"></i>
+        <i class="${item._id} fas fa-trash-alt trashIcon" id="trash${
+      item.number
+    }"></i>
       </div>
     </div>
 	`;
+    return html;
   }
 
   /**
@@ -107,6 +107,45 @@ class Order {
     `;
   }
 
+  listenQty(nbrItems) {
+    for (let i = 1; i <= nbrItems; i++) {
+      document
+        .getElementById(`plus${i}`)
+        .addEventListener("click", function (e) {
+          const itemId = document.getElementById(`plus${i}`).classList[0];
+          data.Cart.add(itemId);
+          data.Page.content[itemId].howMany++;
+          data.Page.displayOrder();
+        });
+      document
+        .getElementById(`minus${i}`)
+        .addEventListener("click", function (e) {
+          const itemId = document.getElementById(`minus${i}`).classList[0];
+          data.Cart.sub(itemId);
+          if (data.Page.content[itemId].howMany == 1) {
+            if (confirm("Voulez vous vraiment abandonner cet ourson ?")) {
+              data.Cart.delete(itemId);
+              delete data.Page.content[itemId];
+              data.Page.displayOrder();
+            }
+          } else {
+            data.Page.content[itemId].howMany--;
+            data.Page.displayOrder();
+          }
+        });
+      document
+        .getElementById(`trash${i}`)
+        .addEventListener("click", function (e) {
+          const itemId = document.getElementById(`trash${i}`).classList[0];
+          if (confirm("Voulez vous vraiment abandonner cet ourson ?")) {
+            data.Cart.delete(itemId);
+            delete data.Page.content[itemId];
+            data.Page.displayOrder();
+          }
+        });
+    }
+  }
+
   /**
    * Displays the total price if the user has something in his cart
    * @param {Number} total  Total price of the cart the user desires
@@ -119,7 +158,7 @@ class Order {
           <p><span id="total">${total}</span>,00€</p>
         </div>
     `;
-    else document.querySelector("tfoot.orderPrice").innerHTML = ``;
+    else document.querySelector("div.orderPrice").innerHTML = ``;
     this.displayForm(total);
   }
 
@@ -134,44 +173,48 @@ class Order {
 			<form method="POST" class="orderForm" id="orderForm">
 				<div class="fields">
           <label for="firstName">Prénom *</label>
-          <input type="text" name="firstName" id="firstName" placeholder="Prénom" pattern="^[A-Za-z][A-Za-zÀ-ÿ]*([ '-]?[A-Za-zÀ-ÿ]+)*$" required oninput="data.Page.checkFormField(this,'Doit contenir au moins 2 lettres qui peuvent être séparées par un espace, un tiret ou une apostrophe')">
+          <input type="text" name="firstName" id="firstName" placeholder="Prénom" pattern="^[A-Za-z][A-Za-zÀ-ÿ]*([ '-]?[A-Za-zÀ-ÿ]+)*$" required>
         </div>
         <div class="warning" id="firstNameWarning"></div>
         <div class="fields">
           <label for="lastName">Nom *</label>
-          <input type="text" name="lastName" id="lastName" placeholder="Nom" pattern="^[A-Za-z][A-Za-zÀ-ÿ]*([ '-]?[A-Za-zÀ-ÿ]+)*$" required oninput="data.Page.checkFormField(this,'Doit contenir au moins 2 lettres qui peuvent être séparées par un espace, un tiret ou une apostrophe')">
+          <input type="text" name="lastName" id="lastName" placeholder="Nom" pattern="^[A-Za-z][A-Za-zÀ-ÿ]*([ '-]?[A-Za-zÀ-ÿ]+)*$" required>
         </div>
         <div class="warning" id="lastNameWarning"></div>
         <div class="fields">
           <label for="address">Adresse *</label>
-          <input type="text" name="address" id="address" placeholder="Adresse" pattern="[a-zA-Z0-9À-ÿ '-]{2,}" required oninput="data.Page.checkFormField(this,'Doit contenir au moins 2 lettres ou chiffres qui peuvent être séparées par un espace, un tiret ou une apostrophe')">
+          <input type="text" name="address" id="address" placeholder="Adresse" pattern="[a-zA-Z0-9À-ÿ '-]{2,}" required>
         </div>
         <div class="warning" id="addressWarning"></div>
         <div class="fields">
           <label for="city">Ville *</label>
-          <input type="text" name="city" id="city" placeholder="Ville" pattern="^[A-Za-z][A-Za-zÀ-ÿ]*([ '-]?[A-Za-zÀ-ÿ]+)*$" required oninput="data.Page.checkFormField(this,'Doit contenir au moins 2 lettres qui peuvent être séparées par un espace, un tiret ou une apostrophe')">
+          <input type="text" name="city" id="city" placeholder="Ville" pattern="^[A-Za-z][A-Za-zÀ-ÿ]*([ '-]?[A-Za-zÀ-ÿ]+)*$" required>
         </div>
         <div class="warning" id="cityWarning"></div>
         <div class="fields">
           <label for="email">Email *</label>
-          <input type="email" name="email" id="email"  placeholder="E-mail" pattern="[a-zA-Z0-9À-ÿ!#$%&'*+/=?^_\`{|}~-]+(\.[a-zA-Z0-9À-ÿ!#$%&'*+/=?^_\`{|}~-]+)*@([a-zA-ZÀ-ÿ0-9]+\.)+[a-zA-ZÀ-ÿ0-9]{2,}" required oninput="data.Page.checkFormField(this,'Doit respecter le format email : anything@email.com')">
+          <input type="email" name="email" id="email"  placeholder="E-mail" pattern="[a-zA-Z0-9À-ÿ!#$%&'*+/=?^_\`{|}~-]+(\.[a-zA-Z0-9À-ÿ!#$%&'*+/=?^_\`{|}~-]+)*@([a-zA-ZÀ-ÿ0-9]+\.)+[a-zA-ZÀ-ÿ0-9]{2,}" required>
         </div>
         <div class="warning" id="emailWarning"></div>
         <p class="notice">Les champs marqués d'un * sont obligatoires afin de pouvoir valider votre commande</p>
         <button id="send" type="submit">Finaliser la commande</button>
       </form>
     `;
-    document.getElementById("orderFinal").classList.add("enabled");
-    document.getElementById("orderGlobal").classList.add("enabled");
-    this.previousUser();
+      document.getElementById("orderFinal").classList.add("enabled");
+      document.getElementById("orderGlobal").classList.add("enabled");
+      this.previousUser();
       this.listen(total);
-    } else document.getElementById("orderForm").innerHTML = ``;
+    } else {
+      document.getElementById("orderFinal").classList.remove("enabled");
+      document.getElementById("orderGlobal").classList.remove("enabled");
+      document.getElementById("orderFormContainer").innerHTML = ``;
+    }
   }
 
   /**
    * Checks if a user is already registered and if it's the case adds the user informations in the form
    */
-  previousUser() {0
+  previousUser() {
     let user = JSON.parse(localStorage.getItem("user"));
     if (user != null) {
       document.getElementById("firstName").value = user.firstName;
@@ -187,7 +230,8 @@ class Order {
    * @param {Number} price the total price of the cart
    */
   listen(price) {
-    document.getElementById("send").addEventListener('click', function(e){
+    this.checkFormField();
+    document.getElementById("send").addEventListener("click", function (e) {
       let i = data.Page;
       e.preventDefault();
       localStorage.setItem("price", price);
@@ -198,33 +242,69 @@ class Order {
   }
 
   /**
+   * Checks the validity of the field given in parameter and if it's invalid sends a warning message
+   */
+  checkFormField() {
+    let fName = document.getElementById("firstName");
+    let lName = document.getElementById("lastName");
+    let where = document.getElementById("address");
+    let town = document.getElementById("city");
+    let mail = document.getElementById("email");
+
+    fName.oninput = function () {
+      if (this.validity.valid)
+        document.getElementById(this.id + "Warning").innerHTML = "";
+      else
+        document.getElementById(this.id + "Warning").innerHTML =
+          "Ceci n'est pas un prénom valide";
+    };
+    lName.oninput = function () {
+      if (this.validity.valid)
+        document.getElementById(this.id + "Warning").innerHTML = "";
+      else
+        document.getElementById(this.id + "Warning").innerHTML =
+          "Ceci n'est pas un nom valide";
+    };
+    where.oninput = function () {
+      if (this.validity.valid)
+        document.getElementById(this.id + "Warning").innerHTML = "";
+      else
+        document.getElementById(this.id + "Warning").innerHTML =
+          "Ceci n'est pas une addresse valide";
+    };
+    town.oninput = function () {
+      if (this.validity.valid)
+        document.getElementById(this.id + "Warning").innerHTML = "";
+      else
+        document.getElementById(this.id + "Warning").innerHTML =
+          "Ceci n'est pas un nom de ville valide";
+    };
+    mail.oninput = function () {
+      if (this.validity.valid)
+        document.getElementById(this.id + "Warning").innerHTML = "";
+      else
+        document.getElementById(this.id + "Warning").innerHTML =
+          "L'email n'est pas au bon format";
+    };
+  }
+
+  /**
    * Regroups all infos concerning the order and sends them under a string format to be used for a fetch request
    */
   validOrder() {
-    let contact =  {
+    let contact = {
       firstName: document.getElementById("firstName").value,
       lastName: document.getElementById("lastName").value,
       address: document.getElementById("address").value,
       city: document.getElementById("city").value,
-      email: document.getElementById("email").value
+      email: document.getElementById("email").value,
     };
     let products = data.Cart.content;
     let datas = JSON.stringify({
       contact,
-      products
+      products,
     });
     data.DataFetcher.postOrder(datas);
-  }
-
-  /**
-   * Checks the validity of the field given in parameter and if it's invalid sends a warning message
-   * @param {HTMLElement} domTarget The HTML element to check for validity  
-   * @param {STring} msg            The message to implement
-   */
-  checkFormField(domTarget, msg) {
-    if (domTarget.validity.valid)
-      document.getElementById(domTarget.id + "Warning").innerHTML = "";
-    else document.getElementById(domTarget.id + "Warning").innerHTML = msg;
   }
 
   /**
@@ -263,3 +343,5 @@ class Order {
     }
   }
 }
+
+export default Order;

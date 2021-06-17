@@ -1,3 +1,5 @@
+import data from '../data';
+
 class Cart {
   /* constructs cart HTML element */
   constructor(domTarget) {
@@ -63,3 +65,5 @@ class Cart {
     data.DataFetcher.saveCart(this.content);
   }
 }
+
+export default Cart;

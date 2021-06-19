@@ -12,13 +12,6 @@ let multipleHtmlPlugins = htmlPageNames.map(name => {
 
 module.exports = {
   mode: 'development',
-  /*entry: {
-    main: './dist/main.js',
-    item: './dist/main.js',
-    order: './dist/main.js',
-    validation: './dist/main.js',
-    //... repeat until example 4
-  },*/
   devtool: false,
   module: {
     rules: [

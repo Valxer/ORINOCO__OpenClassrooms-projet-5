@@ -15,19 +15,29 @@ import './styles/main.scss';
  */
 function scriptSelect() {
   const id = extractId(document.location.search);
-  const url = window.location.pathname;
+  const url = parseUrl(window.location.pathname);
 
-  if (url == "/Front/dist/item.html")
+  if (url == "item.html")
     return new Item(
       document.getElementsByClassName("itemCard"),
       id
     );
-  else if (url == "/Front/dist/order.html")
+  else if (url == "order.html")
     return new Order(document.getElementsByClassName("orderContent"));
-  else if (url == "/Front/dist/validation.html")
+  else if (url == "validation.html")
     return new Validation(document.getElementsByClassName("validationContent"));
   else 
     return new Home(document.getElementsByClassName("cardContainer"));
+}
+
+function parseUrl(url) {
+  for (let i = 0; i < url.length; i++) {
+    if ((url[i] == 'd') && (url[i + 1] == 'i') && (url[i + 2] == 's') && (url[i + 3] == 't') && (url[i + 4] == '/')) {
+      i += 5;
+      return (url.slice(i));
+    }
+  }
+  return (-1);
 }
 
 data.Cart = new Cart(document.querySelector("nav"));

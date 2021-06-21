@@ -234,10 +234,14 @@ class Order {
     document.getElementById("send").addEventListener("click", function (e) {
       let i = data.Page;
       e.preventDefault();
-      localStorage.setItem("price", price);
-      console.log(data.Page);
-      console.log(i);
-      i.validOrder();
+      if (data.Page.checkFormField()){
+        localStorage.setItem("price", price);
+        i.validOrder();
+      }
+      else {
+        alert("Le formulaire n'est pas rempli correctement : merci de le vérifier.");
+        data.Page.listen(price);
+      }
     });
   }
 
@@ -286,6 +290,15 @@ class Order {
         document.getElementById(this.id + "Warning").innerHTML =
           "L'email n'est pas au bon format";
     };
+    if (
+      fName.validity.valid &&
+      lName.validity.valid &&
+      where.validity.valid &&
+      town.validity.valid &&
+      mail.validity.valid
+    )
+      return true;
+    else return false;
   }
 
   /**

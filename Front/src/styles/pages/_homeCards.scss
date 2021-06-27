@@ -1,4 +1,5 @@
 .presentation {
+  text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -6,9 +7,6 @@
   padding: 3rem 1.5rem;
   h2 {
     padding: 0 0 1.5rem 0;
-  }
-  p {
-    text-align: center;
   }
 }
 

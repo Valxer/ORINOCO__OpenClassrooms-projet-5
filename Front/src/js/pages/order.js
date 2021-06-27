@@ -226,7 +226,7 @@ class Order {
   }
 
   /**
-   * Watches the clicks on the submit button, then send the total priuce to the localstorage and valids the order
+   * Watches the clicks on the submit button, then send the total price to the localstorage and valids the order
    * @param {Number} price the total price of the cart
    */
   listen(price) {

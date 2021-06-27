@@ -25,5 +25,9 @@
         text-align: center;
         padding: 15px 0px;
         box-shadow: -3px 3px 5px rgb(200, 200, 200);
+		&:hover {
+			transform: scale(1.1);
+			transition: 200ms;
+		}
 	}
 }

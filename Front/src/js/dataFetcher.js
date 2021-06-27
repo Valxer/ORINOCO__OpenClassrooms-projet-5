@@ -11,9 +11,18 @@ class DataFetcher {
    */
   async fetchItems() {
     if (this.items !== null) return this.items;
-    const result = await fetch(this.url);
-    this.items = await result.json();
-    return this.items;
+    try {
+      const result = await fetch(this.url);
+      if (await result.ok) {
+        this.items = await result.json();
+        return this.items;
+      }
+      alert("Impossible de faire la requête demandée.");
+    } catch (error) {
+      alert(
+        "Le serveur de l'API est inaccessible vérifiez qu'il est bien lancé et qu'il est sur le port 3000."
+      );
+    }
   }
 
   /**
@@ -75,7 +84,7 @@ class DataFetcher {
       headers: {
         "Content-Type": "application/json",
       },
-      body: datas
+      body: datas,
     })
       .then((res) => {
         return res.json();

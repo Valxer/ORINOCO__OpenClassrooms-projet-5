@@ -67,16 +67,25 @@
         align-items: center;
         padding-bottom: 0.5rem;
         .howMany {
-          .subBtn {
+          .fa-minus {
             margin-right: 0.5rem;
+            &:hover {
+              cursor: pointer;
+            }
           }
-          .addBtn {
+          .fa-plus {
             margin-left: 0.5em;
+            &:hover {
+              cursor: pointer;
+            }
           }
           input {
             width: 50px;
             text-align: center;
           }
+        }
+        .fa-trash-alt:hover {
+          cursor: pointer;
         }
       }
     }
@@ -111,7 +120,8 @@
         border-radius: 10px;
         text-align: center;
       }
-      .notice, .warning{
+      .notice,
+      .warning {
         margin-top: 0.5rem;
         font-size: 0.7rem;
         font-style: italic;
@@ -126,6 +136,11 @@
         text-align: center;
         padding: 15px 0px;
         box-shadow: -3px 3px 5px rgb(200, 200, 200);
+        &:hover {
+          transform: scale(1.1);
+          transition: 200ms;
+          cursor: pointer;
+        }
       }
     }
   }

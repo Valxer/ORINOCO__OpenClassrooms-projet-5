@@ -20,7 +20,7 @@ class Validation {
 		data.Cart.deleteAll();
 		domTarget.innerHTML = `
 		<section class="validation">
-			<h1>${user.firstName}, votre achat est bien confirmé !</h1>
+			<h1>${user.firstName}, votre achat est bien confirmé !</br>Merci d'avoir adopté chez Orinoursons.</h1>
 			<h2>En voici le détail</h2>
 			<ul>
 				<li>Référence : ${orderId}</li>

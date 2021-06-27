@@ -43,6 +43,9 @@
     .itemDescription {
       margin-bottom: 1rem;
     }
+    select:hover {
+      cursor: pointer;
+    }
     .itemNumber {
       display: flex;
       justify-content: center;
@@ -51,9 +54,15 @@
       }
       .subBtn {
         margin-right: 0.5rem;
+        &:hover {
+          cursor: pointer;
+        }
       }
       .addBtn {
         margin-left: 0.5em;
+        &:hover {
+          cursor: pointer;
+        }
       }
       input {
         width: 50px;
@@ -83,6 +92,11 @@
       text-align: center;
       padding: 15px 0px;
       box-shadow: -3px 3px 5px rgb(200, 200, 200);
+      &:hover {
+        transform: scale(1.1);
+        transition: 200ms;
+        cursor: pointer;
+      }
     }
   }
 }

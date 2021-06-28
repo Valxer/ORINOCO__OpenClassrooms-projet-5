@@ -12,7 +12,7 @@ Projet 5 de la formation Develeoppeur Web d'OpenClassrooms, il consiste à déve
 	* Une page validation qui confirme la prise en compte de la commande et remercie le client de son achat 
 + Un plan de test qui décrit toutes les fonctions ou méthodes utilisées ainsi que les erreurs possibles sur ces fonctions
 ## Installation
-1. Cloner le repository sur votre ordinateur
+1. Cloner le repository sur votre ordinateur avec ``git clone https://github.com/Valxer/KevinLeVanPhung_5_24052021.git``
 2. Ouvrez le dossier avec VSCode et ouvrez un terminal 
     * Tapez ``cd Back/ && npm install`` pour installer les dépendances du Back-end du site.
 	* Tapez ``node server`` pour lancer le serveur de l'API. Par défaut il devrait se lancer sur le port 3000, si ce n'est pas le cas les requêtes à l'API du site ne seront pas fonctionnelles.

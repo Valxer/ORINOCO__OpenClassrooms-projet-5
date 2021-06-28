@@ -1,6 +1,16 @@
 # Projet5 - Orinoco | Orinoursons
-## Description
 Projet 5 de la formation Develeoppeur Web d'OpenClassrooms, il consiste à développer la partie front-end d'un premier MVP pour un site de e-commerce
+## Objectifs
+1. Créer du contenu dynamique en utilisant javascript
+2. Utiliser une API et les requêtes pour implémenter du contenu et valider une transaction.
+3. Réutiliser les connaissances des projets précédents pour faire un site responsive et optimisé
+## Livrables
++ Un site avec 4 types de page :
+	* Un acceuil avec tous les produits
+	* Une page produit spécifique à chaque produit
+	* Une page panier pour accéder à sa commande, la modifier, la supprimmer ou la valider
+	* Une page validation qui confirme la prise en compte de la commande et remercie le client de son achat 
++ Un plan de test qui décrit toutes les fonctions ou méthodes utilisées ainsi que les erreurs possibles sur ces fonctions
 ## Installation
 1. Cloner le repository sur votre ordinateur
 2. Ouvrez le dossier avec VSCode et ouvrez un terminal 

@@ -11,7 +11,7 @@ let multipleHtmlPlugins = htmlPageNames.map(name => {
 });
 
 module.exports = {
-  mode: 'development',
+  //mode: 'development',
   devtool: false,
   module: {
     rules: [
